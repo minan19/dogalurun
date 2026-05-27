@@ -1,0 +1,45 @@
+{
+  "name": "Hüda-i Şifa — Doğal & Organik Ürünler",
+  "short_name": "Hüda-i Şifa",
+  "description": "Uzman onaylı, bilimsel destekli doğal takviye ve organik gıda ürünleri.",
+  "start_url": "/tr",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAFAF7",
+  "theme_color": "#556B2F",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ürünler",
+      "url": "/tr/products",
+      "description": "Tüm ürünleri incele"
+    },
+    {
+      "name": "Öneri Al",
+      "url": "/tr/recommendations",
+      "description": "Size özel ürün önerisi"
+    },
+    {
+      "name": "Sepetim",
+      "url": "/tr/checkout",
+      "description": "Sepetinizi görüntüleyin"
+    }
+  ],
+  "categories": ["shopping", "health", "lifestyle"],
+  "lang": "tr",
+  "dir": "ltr"
+}

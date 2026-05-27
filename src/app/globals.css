@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Hüda-i Şifa — Zeytun & İnci Paleti */
+  --color-cream-50: #FAFAF7;
+  --color-cream-100: #F2F2EE;
+
+  --color-green-50: #EAF0DC;
+  --color-green-100: #d4e8a8;
+  --color-green-600: #556B2F;
+  --color-green-700: #556B2F;
+  --color-green-800: #2F3B1A;
+  --color-green-900: #1E2218;
+
+  --color-gold-300: #FBF3E0;
+  --color-gold-400: #C49A3C;
+
+  --color-olive-border: #b8d090;
+  --color-olive-qty: #7a9a40;
+
+  --color-text-primary: #1E2218;
+  --color-text-secondary: #5A5E52;
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: var(--color-cream-50);
+  color: var(--color-text-primary);
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.25s ease-out both;
+}
+
+@keyframes cart-fly {
+  0%   { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  60%  { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(0.3); opacity: 0; }
+}
+.animate-cart-fly {
+  animation: cart-fly 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes progress-bar {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(-20%); }
+  100% { transform: translateX(100%); }
+}
+.animate-progress-bar {
+  animation: progress-bar 1.2s ease-in-out infinite;
+}
+
+/* Mobil nav bar için alt boşluk */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  main, footer {
+    padding-bottom: 4rem;
+  }
+}
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* RTL desteği */
+[dir="rtl"] {
+  text-align: right;
+}
