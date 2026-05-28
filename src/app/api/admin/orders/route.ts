@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { sendOrderConfirmation, type OrderEmailData } from "@/lib/email";
+import { checkAdminAuth } from "@/lib/adminAuth";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const authError = checkAdminAuth(req);
+  if (authError) return authError;
+
   const { data, error } = await supabase
     .from("orders")
     .select("*")
@@ -17,6 +21,9 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const authError = checkAdminAuth(req);
+  if (authError) return authError;
+
   const body = await req.json();
   const { data, error } = await supabase
     .from("orders")
@@ -25,16 +32,15 @@ export async function POST(req: NextRequest) {
     .single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  // Send confirmation email non-blockingly — does not delay the response
   if (body.customer_email) {
     const shippingAddress = body.shipping_address ?? {};
     const emailData: OrderEmailData = {
       to: body.customer_email,
-      customerName: body.customer_name ?? shippingAddress.name ?? "Değerli Müşteri",
+      customerName: body.customer_name ?? shippingAddress.name ?? "Degerli Musteri",
       orderId: data.id ?? body.id ?? "",
       items: Array.isArray(body.items)
         ? body.items.map((item: Record<string, unknown>) => ({
-            name: String(item.name ?? item.productName ?? "Ürün"),
+            name: String(item.name ?? item.productName ?? "Urun"),
             quantity: Number(item.quantity ?? 1),
             price: Number(item.price ?? 0),
           }))

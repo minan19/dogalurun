@@ -7,6 +7,18 @@ export async function POST(req: NextRequest) {
     const { order, card, address } = body;
 
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const buyerIp =
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      req.headers.get('x-real-ip') ||
+      '0.0.0.0';
+    const buyerIp =
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      req.headers.get('x-real-ip') ||
+      '0.0.0.0';
+    const buyerIp =
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      req.headers.get('x-real-ip') ||
+      '0.0.0.0';
 
     const result = await initiate3DPayment({
       price: order.subtotal,
@@ -17,6 +29,9 @@ export async function POST(req: NextRequest) {
         surname: address.surname,
         email: address.email,
         phone: address.phone || "+905000000000",
+        ip: buyerIp,
+        ip: buyerIp,
+        ip: buyerIp,
         city: address.city || "Istanbul",
         country: address.country || "Turkey",
         address: address.address,

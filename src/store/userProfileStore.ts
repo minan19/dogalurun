@@ -134,6 +134,21 @@ export const useUserProfileStore = create<UserProfileStore>()(
     {
       name: "hudai-user-profile",
       version: 1,
+      partialize: (state: UserProfileStore) => {
+        const { saveCard, clearCard, savedCard, ...rest } = state;
+        void saveCard; void clearCard; void savedCard;
+        return rest;
+      },
+      partialize: (state: UserProfileStore) => {
+        const { saveCard, clearCard, savedCard, ...rest } = state;
+        void saveCard; void clearCard; void savedCard;
+        return rest;
+      },
+      partialize: (state: UserProfileStore) => {
+        const { saveCard, clearCard, savedCard, ...rest } = state;
+        void saveCard; void clearCard; void savedCard;
+        return rest;
+      },
       // v0 → v1: migrate single savedAddress → savedAddresses array
       migrate: (raw: unknown) => {
         const s = raw as Record<string, unknown>;

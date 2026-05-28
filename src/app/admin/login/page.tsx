@@ -8,7 +8,7 @@ function AdminLoginForm() {
   const searchParams = useSearchParams();
   const from = searchParams.get("from") || "/admin";
   const [password, setPassword] = useState("");
-  const [show, setShow] = useState(true); // varsayılan: şifre görünür
+  const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [shake, setShake] = useState(false);

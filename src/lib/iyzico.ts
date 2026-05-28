@@ -25,6 +25,7 @@ export interface IyzicoPaymentRequest {
     email: string;
     phone: string;
     identityNumber?: string;
+    ip?: string;
     city: string;
     country: string;
     address: string;
@@ -75,7 +76,7 @@ export async function initiate3DPayment(req: IyzicoPaymentRequest) {
       city: req.customer.city,
       country: req.customer.country,
       zipCode: req.customer.zipCode || "00000",
-      ip: "85.34.78.112",
+      ip: req.customer.ip || "0.0.0.0",
     },
     shippingAddress: {
       contactName: `${req.customer.name} ${req.customer.surname}`,

@@ -14,7 +14,8 @@
     "account": "Hesabım",
     "search": "Ara...",
     "sports": "Sporcular",
-    "beauty": "Cilt & Güzellik"
+    "beauty": "Cilt & Güzellik",
+    "home": "Ana Sayfa"
   },
   "hero": {
     "title": "İhtiyacına uygun, uzman onaylı doğal ve takviye ürünler",
@@ -292,6 +293,17 @@
     "name_vitaminEOil": "E Vitamini Yağı",
     "desc_vitaminEOilDesc": "Saf tokoferol içerikli antioksidan yağ. Cilt kuruluğu ve yara izi için.",
     "ing_vitaminEOilIngredients": "d-alfa Tokoferol (Vitamin E) 10000 IU, Ayçiçeği yağı.",
-    "use_vitaminEOilUsage": "Geceleri cilde veya tırnaklara az miktarda uygulayın."
+    "use_vitaminEOilUsage": "Geceleri cilde veya tırnaklara az miktarda uygulayın.",
+    "sportsHeroTitle": "Sporculara Ozel Dogal Urunler",
+    "sportsHeroSubtitle": "Performansinizi dogal takviyelerle destekleyin.",
+    "sportsCtaTitle": "Dogru Takviye, Daha Iyi Performans",
+    "sportsCtaSubtitle": "Uzman diyetisyen ve spor beslenme danismanlarimiz ihtiyaciniza uygun urunleri secmenize yardimci olur.",
+    "sportsCtaButton": "Ucretsiz Danismanlik Al",
+    "beautyHeroTitle": "Dogal Cilt Bakim ve Guzellik",
+    "beautyHeroSubtitle": "Icten disa dogal guzellik. Hyaluronik Asit, Kolajen, Biyotin ve daha fazlasiyla cildinizi besleyin.",
+    "beautyCtaTitle": "Gercek Guzellik Dogadan Gelir",
+    "beautyCtaSubtitle": "Cilt tipi ve ihtiyaciniza gore en uygun dogal guzellik urunlerini uzman ekibimiz belirlesin.",
+    "beautyCtaButton": "Ucretsiz Danismanlik Al",
+    "loading": "Yukleniyor..."
   }
 }

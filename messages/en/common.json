@@ -14,7 +14,8 @@
     "account": "My Account",
     "search": "Search...",
     "sports": "Athletes",
-    "beauty": "Beauty"
+    "beauty": "Beauty",
+    "home": "Home"
   },
   "hero": {
     "title": "Expert-approved natural and supplement products for your needs",
@@ -292,6 +293,17 @@
     "name_vitaminEOil": "Vitamin E Oil",
     "desc_vitaminEOilDesc": "Antioxidant oil with pure tocopherol. For dry skin and scarring.",
     "ing_vitaminEOilIngredients": "d-alpha Tocopherol (Vitamin E) 10000 IU, Sunflower oil.",
-    "use_vitaminEOilUsage": "Apply a small amount to skin or nails at night."
+    "use_vitaminEOilUsage": "Apply a small amount to skin or nails at night.",
+    "sportsHeroTitle": "Natural Products for Athletes",
+    "sportsHeroSubtitle": "Boost your performance with natural supplements. Creatine, BCAA, Whey Protein and more.",
+    "sportsCtaTitle": "Right Supplement, Better Performance",
+    "sportsCtaSubtitle": "Our expert dietitians and sports nutrition consultants help you choose the right products.",
+    "sportsCtaButton": "Get Free Consultation",
+    "beautyHeroTitle": "Natural Skincare & Beauty",
+    "beautyHeroSubtitle": "Natural beauty from the inside out. Nourish your skin with Hyaluronic Acid, Collagen, Biotin and more.",
+    "beautyCtaTitle": "True Beauty Comes from Nature",
+    "beautyCtaSubtitle": "Let our expert team find the most suitable natural beauty products for your skin type.",
+    "beautyCtaButton": "Get Free Consultation",
+    "loading": "Loading..."
   }
 }

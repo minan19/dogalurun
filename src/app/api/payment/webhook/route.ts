@@ -18,11 +18,7 @@ export async function POST(req: NextRequest) {
     const rawBody = await req.text();
     const signature = req.headers.get("x-iyz-signature") ?? "";
 
-    // Verify signature in production
-    if (
-      process.env.NODE_ENV === "production" &&
-      !verifyWebhookSignature(rawBody, signature)
-    ) {
+    if (!verifyWebhookSignature(rawBody, signature)) {
       return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
     }
 

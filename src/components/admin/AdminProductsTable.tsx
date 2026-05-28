@@ -28,7 +28,7 @@ const needLabels: Record<NeedTag, string> = {
 };
 
 const ALL_NEEDS: NeedTag[] = ["immunity", "energy", "digestion", "sleep", "stress", "sport", "skin", "joints"];
-const ALL_CATEGORIES: Category[] = ["supplements", "organic-food", "personal-care", "special", "brands"];
+const ALL_CATEGORIES: Category[] = ["supplements", "organic-food", "personal-care", "special", "brands", "sports", "beauty"];
 
 const badgeLabel: Record<string, string> = { expert: "Uzman", bestseller: "Çok Satan", new: "Yeni" };
 const badgeColor: Record<string, string> = {

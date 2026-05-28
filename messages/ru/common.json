@@ -14,7 +14,8 @@
     "account": "Мой аккаунт",
     "search": "Поиск...",
     "sports": "Спортсменам",
-    "beauty": "Красота"
+    "beauty": "Красота",
+    "home": "Glavnaya"
   },
   "hero": {
     "title": "Натуральные продукты и добавки, одобренные экспертами, для ваших потребностей",
@@ -292,6 +293,17 @@
     "name_vitaminEOil": "Масло Витамина E",
     "desc_vitaminEOilDesc": "Антиоксидантное масло с токоферолом от сухости кожи.",
     "ing_vitaminEOilIngredients": "d-альфа токоферол 10000 МЕ, подсолнечное масло.",
-    "use_vitaminEOilUsage": "Наносите небольшое количество на кожу или ногти вечером."
+    "use_vitaminEOilUsage": "Наносите небольшое количество на кожу или ногти вечером.",
+    "sportsHeroTitle": "Naturalnye produkty dlya sportsmenov",
+    "sportsHeroSubtitle": "Uluchy rezultaty s naturalnymi dobavkami.",
+    "sportsCtaTitle": "Pravilnaya dobavka luchshie rezultaty",
+    "sportsCtaSubtitle": "Nashi eksperty pomogut vybrat podkhodyashchie produkty.",
+    "sportsCtaButton": "Besplatnaya konsultaciya",
+    "beautyHeroTitle": "Naturalny ukhod za kozhey",
+    "beautyHeroSubtitle": "Prirodnaya krasota iznutri.",
+    "beautyCtaTitle": "Nastoyashchaya krasota iz prirody",
+    "beautyCtaSubtitle": "Nashi eksperty podobrut luchshie kosmeticheskie produkty.",
+    "beautyCtaButton": "Besplatnaya konsultaciya",
+    "loading": "Zagruzka..."
   }
 }

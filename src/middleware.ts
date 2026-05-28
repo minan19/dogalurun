@@ -10,9 +10,7 @@ const ADMIN_COOKIE = 'hudai_admin_session';
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Admin rotaları için auth kontrolü
   if (pathname.startsWith('/admin')) {
-    // Login sayfasına her zaman izin ver
     if (pathname === '/admin/login') {
       return NextResponse.next();
     }
@@ -27,7 +25,6 @@ export default function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Diğer tüm rotalar için next-intl
   return intlMiddleware(request);
 }
 
