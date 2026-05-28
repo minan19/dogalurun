@@ -50,6 +50,10 @@ export function Header() {
 
   const navItems = [
     { key: "products", href: "/products" },
+    { key: "sports", href: "/sports" },
+    { key: "beauty", href: "/beauty" },
+    { key: "sports", href: "/sports" },
+    { key: "beauty", href: "/beauty" },
     { key: "recommendations", href: "/recommendations" },
     { key: "brands", href: "/brands" },
     { key: "experts", href: "/experts" },

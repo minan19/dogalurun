@@ -9,6 +9,8 @@ import { StatsStrip } from "@/components/StatsStrip";
 import { BlogTeaser } from "@/components/BlogTeaser";
 import { ExpertNote } from "@/components/ExpertNote";
 import { Footer } from "@/components/Footer";
+import { SportsBanner } from "@/components/SportsBanner";
+import { BeautyBanner } from "@/components/BeautyBanner";
 
 export const metadata: Metadata = {
   title: "Hüda-i Şifa | Doğal Takviye & Organik Ürünler",
@@ -40,6 +42,8 @@ export default async function HomePage({
         <StatsStrip />
         <NeedsSection />
         <FeaturedProducts />
+        <SportsBanner />
+        <BeautyBanner />
         <BlogTeaser />
         <ExpertNote />
       </main>

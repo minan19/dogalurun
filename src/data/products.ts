@@ -3,7 +3,9 @@ export type Category =
   | "organic-food"
   | "personal-care"
   | "special"
-  | "brands";
+  | "brands"
+  | "sports"
+  | "beauty";
 
 export type NeedTag =
   | "immunity"
@@ -46,6 +48,8 @@ export const categories: { key: Category; iconEmoji: string }[] = [
   { key: "organic-food", iconEmoji: "🌿" },
   { key: "personal-care", iconEmoji: "🧴" },
   { key: "special", iconEmoji: "⭐" },
+  { key: "sports", iconEmoji: "🏋️" },
+  { key: "beauty", iconEmoji: "💆" },
   { key: "brands", iconEmoji: "🏷️" },
 ];
 
@@ -303,7 +307,96 @@ export const products: Product[] = [
     rating: 4.5,
     reviewCount: 67,
   },
-  // --- Özel Seçimler ---
+  // --- Spor Ürünleri ---
+  {
+    id: "p13", slug: "kreatin-monohidrat", nameKey: "creatine", descriptionKey: "creatineDesc",
+    category: "sports", needs: ["sport", "energy"], price: 299, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",
+    badge: "bestseller", expertNoteKey: "creatineExpert",
+    ingredientsKey: "creatineIngredients", usageKey: "creatineUsage",
+    amount: "300g", brand: "Hüda-i Şifa", inStock: true, stock: 40,
+    lowStockThreshold: 10, costPrice: 135, marginPct: 55, rating: 4.8, reviewCount: 95,
+  },
+  {
+    id: "p14", slug: "bcaa-aminoasit", nameKey: "bcaa", descriptionKey: "bcaaDesc",
+    category: "sports", needs: ["sport"], price: 349, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80",
+    badge: "expert", expertNoteKey: "bcaaExpert",
+    ingredientsKey: "bcaaIngredients", usageKey: "bcaaUsage",
+    amount: "300g", brand: "Hüda-i Şifa", inStock: true, stock: 35,
+    lowStockThreshold: 10, costPrice: 157, marginPct: 55, rating: 4.7, reviewCount: 62,
+  },
+  {
+    id: "p15", slug: "dogal-whey-protein", nameKey: "wheyProtein", descriptionKey: "wheyProteinDesc",
+    category: "sports", needs: ["sport", "energy"], price: 599, originalPrice: 699, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=600&q=80",
+    badge: "bestseller", expertNoteKey: "wheyProteinExpert",
+    ingredientsKey: "wheyProteinIngredients", usageKey: "wheyProteinUsage",
+    amount: "1000g", brand: "Hüda-i Şifa", inStock: true, stock: 28,
+    lowStockThreshold: 10, costPrice: 270, marginPct: 55, rating: 4.9, reviewCount: 148,
+  },
+  {
+    id: "p16", slug: "l-glutamin", nameKey: "glutamine", descriptionKey: "glutamineDesc",
+    category: "sports", needs: ["sport"], price: 249, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=600&q=80",
+    badge: "new", ingredientsKey: "glutamineIngredients", usageKey: "glutamineUsage",
+    amount: "250g", brand: "Hüda-i Şifa", inStock: true, stock: 22,
+    lowStockThreshold: 10, costPrice: 112, marginPct: 55, rating: 4.6, reviewCount: 34,
+  },
+  {
+    id: "p17", slug: "magnezyum-spor", nameKey: "magnesiumSport", descriptionKey: "magnesiumSportDesc",
+    category: "sports", needs: ["sport", "sleep"], price: 219, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&q=80",
+    badge: "expert", expertNoteKey: "magnesiumSportExpert",
+    ingredientsKey: "magnesiumSportIngredients", usageKey: "magnesiumSportUsage",
+    amount: "60 Kapsül", brand: "Hüda-i Şifa", inStock: true, stock: 31,
+    lowStockThreshold: 10, costPrice: 99, marginPct: 55, rating: 4.7, reviewCount: 47,
+  },
+  // --- Cilt Bakım & Güzellik ---
+  {
+    id: "p18", slug: "hiyaluronik-asit-serum", nameKey: "hyaluronicSerum", descriptionKey: "hyaluronicSerumDesc",
+    category: "beauty", needs: ["skin"], price: 189, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80",
+    badge: "bestseller", expertNoteKey: "hyaluronicSerumExpert",
+    ingredientsKey: "hyaluronicSerumIngredients", usageKey: "hyaluronicSerumUsage",
+    amount: "30ml", brand: "Hüda-i Şifa", inStock: true, stock: 45,
+    lowStockThreshold: 10, costPrice: 85, marginPct: 55, rating: 4.8, reviewCount: 112,
+  },
+  {
+    id: "p19", slug: "kolajen-tozu", nameKey: "collagenPowder", descriptionKey: "collagenPowderDesc",
+    category: "beauty", needs: ["skin"], price: 399, originalPrice: 459, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80",
+    badge: "expert", expertNoteKey: "collagenPowderExpert",
+    ingredientsKey: "collagenPowderIngredients", usageKey: "collagenPowderUsage",
+    amount: "300g", brand: "Hüda-i Şifa", inStock: true, stock: 20,
+    lowStockThreshold: 10, costPrice: 180, marginPct: 55, rating: 4.7, reviewCount: 58,
+  },
+  {
+    id: "p20", slug: "kus-burnu-yagi", nameKey: "rosehipOil", descriptionKey: "rosehipOilDesc",
+    category: "beauty", needs: ["skin"], price: 149, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=80",
+    badge: "new", ingredientsKey: "rosehipOilIngredients", usageKey: "rosehipOilUsage",
+    amount: "30ml", brand: "Hüda-i Şifa", inStock: true, stock: 38,
+    lowStockThreshold: 10, costPrice: 67, marginPct: 55, rating: 4.6, reviewCount: 29,
+  },
+  {
+    id: "p21", slug: "biyotin-5000", nameKey: "biotin", descriptionKey: "biotinDesc",
+    category: "beauty", needs: ["skin"], price: 179, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80",
+    badge: "expert", expertNoteKey: "biotinExpert",
+    ingredientsKey: "biotinIngredients", usageKey: "biotinUsage",
+    amount: "90 Tablet", brand: "Hüda-i Şifa", inStock: true, stock: 55,
+    lowStockThreshold: 10, costPrice: 81, marginPct: 55, rating: 4.8, reviewCount: 87,
+  },
+  {
+    id: "p22", slug: "e-vitamini-yagi", nameKey: "vitaminEOil", descriptionKey: "vitaminEOilDesc",
+    category: "beauty", needs: ["skin"], price: 129, currency: "TRY",
+    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=80",
+    ingredientsKey: "vitaminEOilIngredients", usageKey: "vitaminEOilUsage",
+    amount: "30ml", brand: "Hüda-i Şifa", inStock: true, stock: 42,
+    lowStockThreshold: 10, costPrice: 58, marginPct: 55, rating: 4.5, reviewCount: 41,
+  },
+    // --- Özel Seçimler ---
   {
     id: "p12",
     slug: "bagirsak-sagligi-paketi",
