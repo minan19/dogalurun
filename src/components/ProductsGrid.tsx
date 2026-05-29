@@ -2,6 +2,7 @@
 
 import { useProductStore } from "@/store/productStore";
 import { ProductCard } from "@/components/ProductCard";
+import { useTranslations } from "next-intl";
 import type { Category, NeedTag } from "@/data/products";
 
 interface ProductsGridProps {
@@ -16,10 +17,14 @@ export function ProductsGrid({
   category,
   need,
   sort,
-  noProductsText = "Ürün bulunamadı.",
-  productsCountLabel = "ürün",
+  noProductsText,
+  productsCountLabel,
 }: ProductsGridProps) {
+  const t = useTranslations("products");
   const allProducts = useProductStore((s) => s.products);
+
+  const noProducts = noProductsText ?? t("noProducts");
+  const countLabel = productsCountLabel ?? t("productsCount");
 
   let filtered = [...allProducts];
 
@@ -45,7 +50,7 @@ export function ProductsGrid({
     return (
       <div className="text-center py-20">
         <span className="text-5xl">🌿</span>
-        <p className="mt-4 text-text-secondary">{noProductsText}</p>
+        <p className="mt-4 text-text-secondary">{noProducts}</p>
       </div>
     );
   }
@@ -53,7 +58,7 @@ export function ProductsGrid({
   return (
     <>
       <p className="text-sm text-text-secondary mb-6">
-        {filtered.length} {productsCountLabel}
+        {filtered.length} {countLabel}
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
         {filtered.map((product) => (
