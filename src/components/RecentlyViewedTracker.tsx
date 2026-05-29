@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { products } from "@/data/products";
 
 const STORAGE_KEY = "hudaisifa_recently_viewed";
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export function RecentlyViewedTracker({ productId, locale, productNames = {} }: Props) {
+  const t = useTranslations("products");
   const [recentIds, setRecentIds] = useState<string[]>([]);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export function RecentlyViewedTracker({ productId, locale, productNames = {} }: 
 
   return (
     <section className="mt-12 pt-10 border-t border-olive-border/20">
-      <h2 className="text-xl font-bold text-green-900 mb-6">Son Görüntüledikleriniz</h2>
+      <h2 className="text-xl font-bold text-green-900 mb-6">{t("recentlyViewed")}</h2>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {recentProducts.map(p => {
           const pDiscount = p.originalPrice
