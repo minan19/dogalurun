@@ -72,6 +72,8 @@
   "blog": {
     "label": "Expert Content",
     "title": "Health Guide",
+    "pageTitle": "Health & Nutrition Blog",
+    "pageDesc": "Informative articles on natural health, nutrition and supplement products from expert authors.",
     "viewAll": "All Articles",
     "viewAllMobile": "View All Articles",
     "readMinutes": "min read",

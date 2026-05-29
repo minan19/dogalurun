@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
-export const metadata: Metadata = {
-  title: "Sağlık & Beslenme Blogu | Hüda-i Şifa",
-  description: "Uzman yazarlardan doğal sağlık, beslenme ve takviye ürünleri hakkında bilgilendirici makaleler.",
-  openGraph: { title: "Sağlık & Beslenme Blogu | Hüda-i Şifa", images: [{ url: "/logo.png" }] },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
+  const title = `${t("pageTitle")} | Hüda-i Şifa`;
+  return {
+    title,
+    description: t("pageDesc"),
+    openGraph: { title, images: [{ url: "/logo.png" }] },
+  };
+}
 
 interface Article {
   id: string;

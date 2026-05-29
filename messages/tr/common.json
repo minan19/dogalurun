@@ -72,6 +72,8 @@
   "blog": {
     "label": "Uzman İçerikleri",
     "title": "Sağlık Rehberi",
+    "pageTitle": "Sağlık & Beslenme Blogu",
+    "pageDesc": "Uzman yazarlardan doğal sağlık, beslenme ve takviye ürünleri hakkında bilgilendirici makaleler.",
     "viewAll": "Tüm Yazılar",
     "viewAllMobile": "Tüm Yazıları Gör",
     "readMinutes": "dk okuma",
