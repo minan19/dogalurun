@@ -172,6 +172,7 @@
     "vatIncluded": "KDV dahil",
     "outOfStock": "Tükendi",
     "lowStock": "Son {count} adet!",
+    "stockLimited": "Sınırlı Stok",
     "wishlistAriaLabel": "İstek listesine ekle",
     "wishlistAdd": "İstek listesine ekle",
     "wishlistTitle": "İstek Listem",

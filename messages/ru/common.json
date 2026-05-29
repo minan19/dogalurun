@@ -172,6 +172,7 @@
     "vatIncluded": "С учётом НДС",
     "outOfStock": "Нет в наличии",
     "lowStock": "Осталось {count} шт.!",
+    "stockLimited": "Ограниченный запас",
     "wishlistAriaLabel": "Добавить в избранное",
     "wishlistAdd": "Добавить в избранное",
     "wishlistTitle": "Список желаний",

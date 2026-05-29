@@ -172,6 +172,7 @@
     "vatIncluded": "شامل الضريبة",
     "outOfStock": "نفذ المخزون",
     "lowStock": "آخر {count} قطع!",
+    "stockLimited": "مخزون محدود",
     "wishlistAriaLabel": "أضف إلى قائمة الرغبات",
     "wishlistAdd": "أضف إلى قائمة الرغبات",
     "wishlistTitle": "قائمة رغباتي",

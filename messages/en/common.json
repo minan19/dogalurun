@@ -172,6 +172,7 @@
     "vatIncluded": "VAT included",
     "outOfStock": "Out of Stock",
     "lowStock": "Only {count} left!",
+    "stockLimited": "Limited Stock",
     "wishlistAriaLabel": "Add to wishlist",
     "wishlistAdd": "Add to wishlist",
     "wishlistTitle": "My Wishlist",

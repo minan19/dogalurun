@@ -61,11 +61,10 @@ export function ProductCard({ product }: ProductCardProps) {
     new: { label: t("badgeNew"), cls: "bg-green-600 text-white" },
   };
 
-  // Stock badge config
   const stockBadge = (() => {
-    if (product.stock === 0) return { label: "Tükendi", cls: "bg-red-500 text-white" };
-    if (product.stock <= 5) return { label: `Son ${product.stock} ürün`, cls: "bg-orange-500 text-white" };
-    if (product.stock <= 10) return { label: "Sınırlı Stok", cls: "bg-yellow-500 text-white" };
+    if (product.stock === 0) return { label: t("outOfStock"), cls: "bg-red-500 text-white" };
+    if (product.stock <= 5) return { label: t("lowStock", { count: product.stock }), cls: "bg-orange-500 text-white" };
+    if (product.stock <= 10) return { label: t("stockLimited"), cls: "bg-yellow-500 text-white" };
     return null;
   })();
 
@@ -204,7 +203,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 : "bg-green-700 hover:bg-green-800 text-white"
             }`}
           >
-            {isOutOfStock ? "Stokta Yok" : t("addToCart")}
+            {isOutOfStock ? t("outOfStock") : t("addToCart")}
           </button>
         </div>
       </div>
