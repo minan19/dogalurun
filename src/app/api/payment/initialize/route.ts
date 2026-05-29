@@ -6,19 +6,34 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { order, card, address } = body;
 
+    if (!order || !card || !address) {
+      return NextResponse.json({ success: false, error: "Eksik bilgi" }, { status: 400 });
+    }
+
+    if (
+      typeof card.cardNumber !== "string" || !card.cardNumber ||
+      typeof card.expireMonth !== "string" || !card.expireMonth ||
+      typeof card.expireYear !== "string" || !card.expireYear ||
+      typeof card.cvc !== "string" || !card.cvc
+    ) {
+      return NextResponse.json({ success: false, error: "Kart bilgileri eksik" }, { status: 400 });
+    }
+
+    if (
+      typeof address.name !== "string" || !address.name ||
+      typeof address.surname !== "string" || !address.surname ||
+      typeof address.email !== "string" || !address.email ||
+      typeof address.address !== "string" || !address.address ||
+      typeof address.city !== "string" || !address.city
+    ) {
+      return NextResponse.json({ success: false, error: "Adres bilgileri eksik" }, { status: 400 });
+    }
+
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
     const buyerIp =
-      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-      req.headers.get('x-real-ip') ||
-      '0.0.0.0';
-    const buyerIp =
-      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-      req.headers.get('x-real-ip') ||
-      '0.0.0.0';
-    const buyerIp =
-      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-      req.headers.get('x-real-ip') ||
-      '0.0.0.0';
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("x-real-ip") ||
+      "0.0.0.0";
 
     const result = await initiate3DPayment({
       price: order.subtotal,
@@ -29,8 +44,6 @@ export async function POST(req: NextRequest) {
         surname: address.surname,
         email: address.email,
         phone: address.phone || "+905000000000",
-        ip: buyerIp,
-        ip: buyerIp,
         ip: buyerIp,
         city: address.city || "Istanbul",
         country: address.country || "Turkey",
@@ -56,7 +69,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { success: false, error: result.errorMessage || "Ödeme başlatılamadı" },
+      { success: false, error: result.errorMessage || "Odeme baslatılamadı" },
       { status: 400 }
     );
   } catch (err) {

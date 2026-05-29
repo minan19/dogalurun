@@ -12,18 +12,41 @@ import { Footer } from "@/components/Footer";
 import { SportsBanner } from "@/components/SportsBanner";
 import { BeautyBanner } from "@/components/BeautyBanner";
 
-export const metadata: Metadata = {
-  title: "Hüda-i Şifa | Doğal Takviye & Organik Ürünler",
-  description: "Uzman diyetisyen ve eczacılar tarafından onaylı, sertifikalı laboratuvarlarda test edilmiş doğal takviye ve organik ürünler. Ücretsiz danışmanlık, güvenli ödeme.",
-  keywords: ["doğal takviye", "organik ürün", "vitamin", "mineral", "takviye edici gıda", "uzman danışman"],
-  openGraph: {
-    title: "Hüda-i Şifa | Doğal Takviye & Organik Ürünler",
-    description: "Uzman onaylı, test edilmiş doğal takviye ürünleri. Ücretsiz danışmanlık.",
-    type: "website",
-    locale: "tr_TR",
-    siteName: "Hüda-i Şifa",
-  },
+const SITE = "https://hudaisifa.com";
+const locales = ["tr", "en", "ar", "ru"] as const;
+
+const OG_LOCALE: Record<string, string> = {
+  tr: "tr_TR", en: "en_US", ar: "ar_SA", ru: "ru_RU",
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const messages = (await import(`../../../messages/${locale}/common.json`)).default;
+
+  return {
+    title: messages.meta.title,
+    description: messages.meta.description,
+    openGraph: {
+      title: messages.meta.title,
+      description: messages.meta.description,
+      type: "website",
+      locale: OG_LOCALE[locale] ?? "tr_TR",
+      siteName: "Hüda-i Şifa",
+      url: `${SITE}/${locale}`,
+    },
+    alternates: {
+      canonical: `${SITE}/${locale}`,
+      languages: Object.fromEntries([
+        ...locales.map((l) => [l, `${SITE}/${l}`]),
+        ["x-default", `${SITE}/tr`],
+      ]),
+    },
+  };
+}
 
 export default async function HomePage({
   params,

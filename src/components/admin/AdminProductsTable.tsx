@@ -14,6 +14,8 @@ const categoryLabels: Record<Category, string> = {
   "personal-care": "Kişisel Bakım",
   special: "Özel Seçim",
   brands: "Marka Ürünleri",
+  sports: "Spor & Aktif Yaşam",
+  beauty: "Cilt Bakım & Güzellik",
 };
 
 const needLabels: Record<NeedTag, string> = {

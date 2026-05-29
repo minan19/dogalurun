@@ -17,7 +17,22 @@ function isRateLimited(ip: string): boolean {
 }
 
 export async function POST(request: NextRequest) {
-  const { action, password } = await request.json();
+  let body: Record<string, unknown>;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: 'Gecersiz istek' }, { status: 400 });
+  }
+
+  if (!body || typeof body !== 'object') {
+    return NextResponse.json({ error: 'Gecersiz istek' }, { status: 400 });
+  }
+
+  const { action, password } = body;
+
+  if (typeof action !== 'string' || !['login', 'logout'].includes(action)) {
+    return NextResponse.json({ error: 'Gecersiz islem' }, { status: 400 });
+  }
 
   if (action === 'login') {
     const ip =
@@ -50,11 +65,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: false, error: 'Sifre hatali' }, { status: 401 });
   }
 
-  if (action === 'logout') {
-    const response = NextResponse.json({ success: true });
-    response.cookies.delete(ADMIN_COOKIE);
-    return response;
-  }
-
-  return NextResponse.json({ error: 'Gecersiz islem' }, { status: 400 });
+  const response = NextResponse.json({ success: true });
+  response.cookies.delete(ADMIN_COOKIE);
+  return response;
 }
