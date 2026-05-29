@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface Review {
   id: number;
@@ -25,7 +26,12 @@ interface ProductReviewsProps {
   reviewCount: number;
 }
 
+const StarPath = () => (
+  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+);
+
 export function ProductReviews({ rating, reviewCount }: ProductReviewsProps) {
+  const t = useTranslations("products");
   const [showForm, setShowForm] = useState(false);
   const [newRating, setNewRating] = useState(5);
   const [hoverRating, setHoverRating] = useState(0);
@@ -46,7 +52,7 @@ export function ProductReviews({ rating, reviewCount }: ProductReviewsProps) {
 
   return (
     <div className="mt-10 border-t border-olive-border/20 pt-10">
-      <h2 className="text-lg font-bold text-green-900 mb-6">Müşteri Yorumları</h2>
+      <h2 className="text-lg font-bold text-green-900 mb-6">{t("reviewsTitle")}</h2>
 
       {/* Özet */}
       <div className="flex flex-col sm:flex-row gap-6 mb-8">
@@ -55,11 +61,11 @@ export function ProductReviews({ rating, reviewCount }: ProductReviewsProps) {
           <div className="flex gap-0.5 my-1">
             {[1,2,3,4,5].map(s => (
               <svg key={s} className={`w-4 h-4 ${s <= Math.round(rating) ? "text-gold-400" : "text-text-secondary/20"}`} fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                <StarPath />
               </svg>
             ))}
           </div>
-          <span className="text-xs text-text-secondary">{reviewCount} yorum</span>
+          <span className="text-xs text-text-secondary">{reviewCount} {t("reviews")}</span>
         </div>
 
         <div className="flex-1 flex flex-col gap-1.5">
@@ -67,7 +73,7 @@ export function ProductReviews({ rating, reviewCount }: ProductReviewsProps) {
             <div key={star} className="flex items-center gap-2 text-xs">
               <span className="w-4 text-text-secondary text-right">{star}</span>
               <svg className="w-3 h-3 text-gold-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                <StarPath />
               </svg>
               <div className="flex-1 bg-olive-border/20 rounded-full h-2">
                 <div className="bg-gold-400 h-2 rounded-full transition-all" style={{ width: `${pct}%` }} />
@@ -88,13 +94,13 @@ export function ProductReviews({ rating, reviewCount }: ProductReviewsProps) {
                   <div className="flex gap-0.5">
                     {[1,2,3,4,5].map(s => (
                       <svg key={s} className={`w-3.5 h-3.5 ${s <= rv.rating ? "text-gold-400" : "text-text-secondary/20"}`} fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        <StarPath />
                       </svg>
                     ))}
                   </div>
                   {rv.verified && (
                     <span className="text-[10px] text-green-700 bg-green-50 border border-green-700/20 px-1.5 py-0.5 rounded-full font-medium">
-                      ✓ Doğrulanmış Alım
+                      ✓ {t("reviewVerified")}
                     </span>
                   )}
                 </div>
@@ -111,15 +117,15 @@ export function ProductReviews({ rating, reviewCount }: ProductReviewsProps) {
       {/* Yorum yaz */}
       {submitted ? (
         <div className="bg-green-50 border border-green-700/20 rounded-2xl p-5 text-center">
-          <p className="text-sm font-semibold text-green-700">✓ Yorumunuz inceleme için gönderildi.</p>
-          <p className="text-xs text-text-secondary mt-1">Onaylandıktan sonra burada görünecek.</p>
+          <p className="text-sm font-semibold text-green-700">✓ {t("reviewSubmitSuccess")}</p>
+          <p className="text-xs text-text-secondary mt-1">{t("reviewSubmitHint")}</p>
         </div>
       ) : showForm ? (
         <form onSubmit={handleSubmit} className="bg-white border border-olive-border/30 rounded-2xl p-5 flex flex-col gap-4">
-          <h3 className="text-sm font-bold text-green-900">Yorum Yaz</h3>
+          <h3 className="text-sm font-bold text-green-900">{t("reviewWrite")}</h3>
           {/* Yıldız seçimi */}
           <div>
-            <label className="text-xs font-semibold text-green-800 block mb-2">Puanınız</label>
+            <label className="text-xs font-semibold text-green-800 block mb-2">{t("reviewYourRating")}</label>
             <div className="flex gap-1">
               {[1,2,3,4,5].map(s => (
                 <button
@@ -131,37 +137,37 @@ export function ProductReviews({ rating, reviewCount }: ProductReviewsProps) {
                   className="transition-transform hover:scale-110"
                 >
                   <svg className={`w-7 h-7 transition-colors ${s <= (hoverRating || newRating) ? "text-gold-400" : "text-text-secondary/20"}`} fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    <StarPath />
                   </svg>
                 </button>
               ))}
             </div>
           </div>
           <div>
-            <label className="text-xs font-semibold text-green-800 block mb-1.5">Adınız</label>
+            <label className="text-xs font-semibold text-green-800 block mb-1.5">{t("reviewYourName")}</label>
             <input required value={formData.author} onChange={e => setFormData(p => ({ ...p, author: e.target.value }))}
               className="w-full border border-olive-border/40 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-700/50 bg-cream-50"
-              placeholder="Ad Soyad" />
+              placeholder={t("reviewNamePlaceholder")} />
           </div>
           <div>
-            <label className="text-xs font-semibold text-green-800 block mb-1.5">Başlık</label>
+            <label className="text-xs font-semibold text-green-800 block mb-1.5">{t("reviewTitleLabel")}</label>
             <input required value={formData.title} onChange={e => setFormData(p => ({ ...p, title: e.target.value }))}
               className="w-full border border-olive-border/40 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-700/50 bg-cream-50"
-              placeholder="Yorumunuzu özetleyin" />
+              placeholder={t("reviewTitlePlaceholder")} />
           </div>
           <div>
-            <label className="text-xs font-semibold text-green-800 block mb-1.5">Yorumunuz</label>
+            <label className="text-xs font-semibold text-green-800 block mb-1.5">{t("reviewBodyLabel")}</label>
             <textarea required value={formData.body} onChange={e => setFormData(p => ({ ...p, body: e.target.value }))}
               rows={4}
               className="w-full border border-olive-border/40 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-700/50 bg-cream-50 resize-none"
-              placeholder="Ürün hakkındaki deneyiminizi paylaşın..." />
+              placeholder={t("reviewBodyPlaceholder")} />
           </div>
           <div className="flex gap-3">
             <button type="submit" className="flex-1 bg-green-700 hover:bg-green-800 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors">
-              Gönder
+              {t("reviewSubmit")}
             </button>
             <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2.5 border border-olive-border/40 rounded-xl text-sm text-text-secondary hover:bg-cream-100 transition-colors">
-              İptal
+              {t("reviewCancel")}
             </button>
           </div>
         </form>
@@ -170,7 +176,7 @@ export function ProductReviews({ rating, reviewCount }: ProductReviewsProps) {
           onClick={() => setShowForm(true)}
           className="w-full border-2 border-dashed border-olive-border/40 rounded-2xl py-4 text-sm font-medium text-text-secondary hover:border-green-700/30 hover:text-green-700 hover:bg-green-50 transition-all"
         >
-          + Yorum Yaz
+          {t("reviewWriteButton")}
         </button>
       )}
     </div>
