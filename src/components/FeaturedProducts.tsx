@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { useCartStore } from "@/store/cartStore";
 import { useProductStore } from "@/store/productStore";
@@ -23,6 +24,7 @@ export function FeaturedProducts() {
   const allProducts = useProductStore((s) => s.products);
   const featured = allProducts.filter((p) => p.badge === "bestseller" || p.badge === "expert").slice(0, 4);
   const [added, setAdded] = useState<string | null>(null);
+  const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({});
   const tf = useTranslations("featured");
   const tp = useTranslations("products");
 
@@ -60,12 +62,23 @@ export function FeaturedProducts() {
               {/* Görsel alanı */}
               <Link href={`/products/${p.slug}`}>
                 <div className="relative aspect-square bg-cream-100 overflow-hidden">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-5xl opacity-30">
-                      {p.category === "supplements" ? "💊" :
-                       p.category === "organic-food" ? "🌿" : "🧴"}
-                    </span>
-                  </div>
+                  {p.image && !imgErrors[p.id] ? (
+                    <Image
+                      src={p.image}
+                      alt={p.brand}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                      onError={() => setImgErrors((prev) => ({ ...prev, [p.id]: true }))}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-5xl opacity-30">
+                        {p.category === "supplements" ? "💊" :
+                         p.category === "organic-food" ? "🌿" : "🧴"}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Badge */}
                   {p.badge && (

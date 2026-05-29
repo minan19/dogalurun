@@ -1,11 +1,13 @@
 import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "@/i18n/navigation";
 import { getProductBySlug, products } from "@/data/products";
 import { ProductDetailActions } from "@/components/ProductDetailActions";
+import { ProductDetailImage } from "@/components/ProductDetailImage";
 import { ProductReviews } from "@/components/ProductReviews";
 import { RecentlyViewedTracker } from "@/components/RecentlyViewedTracker";
 import { StickyCartBar } from "@/components/StickyCartBar";
@@ -115,19 +117,13 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
             {/* Sol: Görsel */}
-            <div className="relative aspect-square rounded-2xl bg-green-50 border border-olive-border/30 flex items-center justify-center overflow-hidden">
-              <span className="text-9xl opacity-15">🌿</span>
-              {product.badge && (
-                <span className={`absolute top-4 left-4 text-sm font-semibold px-3 py-1.5 rounded-full ${badgeConfig[product.badge].cls}`}>
-                  {badgeConfig[product.badge].label}
-                </span>
-              )}
-              {discount > 0 && (
-                <span className="absolute top-4 right-4 text-sm font-bold bg-red-500 text-white px-3 py-1.5 rounded-full">
-                  -{discount}%
-                </span>
-              )}
-            </div>
+            <ProductDetailImage
+              src={product.image}
+              alt={t(`name_${product.nameKey}`)}
+              badgeLabel={product.badge ? badgeConfig[product.badge].label : undefined}
+              badgeCls={product.badge ? badgeConfig[product.badge].cls : undefined}
+              discount={discount}
+            />
 
             {/* Sağ: Bilgi */}
             <div className="flex flex-col gap-6">
@@ -252,8 +248,18 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                       : 0;
                     return (
                       <Link key={p.id} href={`/products/${p.slug}`} className="group bg-white rounded-2xl border border-olive-border/30 overflow-hidden hover:shadow-md transition-all hover:-translate-y-0.5">
-                        <div className="relative aspect-square bg-green-50 flex items-center justify-center">
-                          <span className="text-4xl opacity-20">🌿</span>
+                        <div className="relative aspect-square bg-green-50 flex items-center justify-center overflow-hidden">
+                          {p.image ? (
+                            <Image
+                              src={p.image}
+                              alt={p.brand}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-500"
+                              unoptimized
+                            />
+                          ) : (
+                            <span className="text-4xl opacity-20">🌿</span>
+                          )}
                           {pDiscount > 0 && (
                             <span className="absolute top-2 right-2 text-[10px] font-bold bg-red-500 text-white px-1.5 py-0.5 rounded-full">-{pDiscount}%</span>
                           )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { products } from "@/data/products";
@@ -17,6 +18,7 @@ interface Props {
 export function RecentlyViewedTracker({ productId, locale, productNames = {} }: Props) {
   const t = useTranslations("products");
   const [recentIds, setRecentIds] = useState<string[]>([]);
+  const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     try {
@@ -53,8 +55,19 @@ export function RecentlyViewedTracker({ productId, locale, productNames = {} }: 
               href={`/${locale}/products/${p.slug}`}
               className="group bg-white rounded-2xl border border-olive-border/30 overflow-hidden hover:shadow-md transition-all hover:-translate-y-0.5"
             >
-              <div className="relative aspect-square bg-green-50 flex items-center justify-center">
-                <span className="text-4xl opacity-20">🌿</span>
+              <div className="relative aspect-square bg-green-50 flex items-center justify-center overflow-hidden">
+                {p.image && !imgErrors[p.id] ? (
+                  <Image
+                    src={p.image}
+                    alt={p.brand}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    unoptimized
+                    onError={() => setImgErrors((prev) => ({ ...prev, [p.id]: true }))}
+                  />
+                ) : (
+                  <span className="text-4xl opacity-20">🌿</span>
+                )}
                 {pDiscount > 0 && (
                   <span className="absolute top-2 right-2 text-[10px] font-bold bg-red-500 text-white px-1.5 py-0.5 rounded-full">
                     -{pDiscount}%
