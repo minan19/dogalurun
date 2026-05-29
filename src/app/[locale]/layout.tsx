@@ -19,6 +19,7 @@ import { RegionalHealthBanner } from "@/components/RegionalHealthBanner";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const CookieBanner = dynamic(() => import("@/components/CookieBanner").then((m) => m.CookieBanner), { ssr: false });
+const CartAbandonGuard = dynamic(() => import("@/components/CartAbandonGuard").then((m) => m.CartAbandonGuard), { ssr: false });
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -104,6 +105,7 @@ export default async function LocaleLayout({
         <WhatsAppButton />
         <FloatingButtons />
         <CookieBanner />
+        <CartAbandonGuard />
         <ToastContainer />
       </div>
     </NextIntlClientProvider>
