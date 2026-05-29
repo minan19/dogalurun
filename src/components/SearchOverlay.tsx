@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface SearchOverlayProps {
   onClose: () => void;
@@ -40,10 +41,18 @@ function clearRecent() {
   localStorage.removeItem(RECENT_KEY);
 }
 
+const suggestionsByLocale: Record<string, string[]> = {
+  tr: ["Omega-3", "Probiyotik", "Vitamin D", "Magnezyum", "Organik Bal", "Çörek Otu"],
+  en: ["Omega-3", "Probiotic", "Vitamin D", "Magnesium", "Organic Honey", "Black Cumin"],
+  ar: ["أوميغا-3", "بروبيوتيك", "فيتامين د", "المغنيسيوم", "عسل عضوي", "حبة البركة"],
+  ru: ["Омега-3", "Пробиотик", "Витамин D", "Магний", "Органический мёд", "Чёрный тмин"],
+};
+
 export function SearchOverlay({ onClose }: SearchOverlayProps) {
   const router = useRouter();
   const params = useParams();
   const locale = (params?.locale as string) || "tr";
+  const t = useTranslations("nav");
   const [query, setQuery] = useState("");
   const [highlighted, setHighlighted] = useState(-1);
   const [recent, setRecent] = useState<string[]>([]);
@@ -51,6 +60,8 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const suggestions = suggestionsByLocale[locale] ?? suggestionsByLocale.tr;
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -88,7 +99,6 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
     return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
   }, [query, locale]);
 
-  // Klavye navigasyonu
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") { e.preventDefault(); setHighlighted((h) => Math.min(h + 1, results.length - 1)); }
     if (e.key === "ArrowUp") { e.preventDefault(); setHighlighted((h) => Math.max(h - 1, -1)); }
@@ -107,8 +117,6 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
     onClose();
   };
 
-  const suggestions = ["Omega-3", "Probiyotik", "Vitamin D", "Magnezyum", "Organik Bal", "Çörek Otu"];
-
   return (
     <>
       <div className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm" onClick={onClose} />
@@ -126,7 +134,7 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
               value={query}
               onChange={(e) => { setQuery(e.target.value); setHighlighted(-1); }}
               onKeyDown={handleKeyDown}
-              placeholder="Ürün, vitamin, ihtiyaç ara..."
+              placeholder={t("searchPlaceholder")}
               className="flex-1 text-sm text-text-primary placeholder:text-text-secondary/40 focus:outline-none bg-transparent"
             />
             {query && (
@@ -141,13 +149,13 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
             </button>
           </div>
 
-          {/* Sonuçlar */}
+          {/* Results */}
           <div className="max-h-[360px] overflow-y-auto">
             {query.trim().length >= 2 ? (
               isLoading ? (
                 <div className="px-4 py-8 text-center">
                   <div className="inline-block w-5 h-5 border-2 border-green-600 border-t-transparent rounded-full animate-spin mb-2" />
-                  <p className="text-sm text-text-secondary">Aranıyor...</p>
+                  <p className="text-sm text-text-secondary">{t("searchSearching")}</p>
                 </div>
               ) : results.length > 0 ? (
                 <ul>
@@ -181,26 +189,25 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
                       onClick={() => handleSelect(query.trim())}
                       className="text-xs text-green-700 hover:underline font-medium"
                     >
-                      Tüm ürünlerde "{query}" ara →
+                      {t("searchAllResults", { query })}
                     </Link>
                   </li>
                 </ul>
               ) : (
                 <div className="px-4 py-8 text-center">
                   <span className="text-2xl block mb-2">🔍</span>
-                  <p className="text-sm text-text-secondary">"{query}" için sonuç bulunamadı.</p>
-                  <p className="text-xs text-text-secondary/60 mt-1">Farklı bir kelime deneyin.</p>
+                  <p className="text-sm text-text-secondary">{t("searchNoResults", { query })}</p>
+                  <p className="text-xs text-text-secondary/60 mt-1">{t("searchNoResultsHint")}</p>
                 </div>
               )
             ) : (
               <div className="px-4 py-4 space-y-4">
-                {/* Son aramalar */}
                 {recent.length > 0 && (
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-[11px] text-text-secondary/60 font-medium uppercase tracking-wide">Son Aramalar</p>
+                      <p className="text-[11px] text-text-secondary/60 font-medium uppercase tracking-wide">{t("searchRecent")}</p>
                       <button onClick={() => { clearRecent(); setRecent([]); }} className="text-[10px] text-text-secondary/40 hover:text-red-400 transition-colors">
-                        Temizle
+                        {t("searchClear")}
                       </button>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -216,9 +223,8 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
                     </div>
                   </div>
                 )}
-                {/* Popüler aramalar */}
                 <div>
-                  <p className="text-[11px] text-text-secondary/60 font-medium uppercase tracking-wide mb-2">Popüler Aramalar</p>
+                  <p className="text-[11px] text-text-secondary/60 font-medium uppercase tracking-wide mb-2">{t("searchPopular")}</p>
                   <div className="flex flex-wrap gap-2">
                     {suggestions.map((s) => (
                       <button key={s} onClick={() => setQuery(s)}
