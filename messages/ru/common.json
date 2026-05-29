@@ -94,7 +94,10 @@
     "post3Excerpt": "Почему бисглицинат магния считается более эффективным для сна по сравнению с другими формами?",
     "post3Author": "Дит. Фатма Демир",
     "post3Date": "5 мар 2026",
-    "post3ReadTime": "6"
+    "post3ReadTime": "6",
+    "blogSubtitle": "Научный контент, подготовленный нашими экспертами.",
+    "blogLoadError": "Произошла ошибка при загрузке контента. Пожалуйста, попробуйте позже.",
+    "blogBackToAll": "← Все статьи"
   },
   "footer": {
     "about": "О нас",
@@ -347,5 +350,20 @@
     "beautyCtaSubtitle": "Наши эксперты подберут наиболее подходящие натуральные косметические продукты для вашего типа кожи.",
     "beautyCtaButton": "Получить бесплатную консультацию",
     "loading": "Загрузка..."
+  },
+  "auth": {
+    "resetPasswordTitle": "Сброс пароля",
+    "resetPasswordSubtitle": "Задайте новый пароль",
+    "newPasswordLabel": "Новый пароль",
+    "newPasswordPlaceholder": "Минимум 8 символов",
+    "confirmPasswordLabel": "Подтверждение пароля",
+    "confirmPasswordPlaceholder": "Повторите пароль",
+    "passwordTooShort": "Пароль должен содержать не менее 8 символов.",
+    "passwordMismatch": "Пароли не совпадают.",
+    "passwordUpdateFailed": "Не удалось обновить пароль.",
+    "passwordUpdated": "Пароль обновлён!",
+    "redirectingToAccount": "Перенаправление в ваш аккаунт...",
+    "updating": "Обновление...",
+    "updatePassword": "Обновить пароль"
   }
 }

@@ -94,7 +94,10 @@
     "post3Excerpt": "لماذا يُعتبر مغنيسيوم البيسغليسينات أكثر فعالية للنوم مقارنة بالأشكال الأخرى؟",
     "post3Author": "أخص. تغذية فاطمة دمير",
     "post3Date": "5 مارس 2026",
-    "post3ReadTime": "6"
+    "post3ReadTime": "6",
+    "blogSubtitle": "محتوى علمي أعده خبراؤنا.",
+    "blogLoadError": "حدث خطأ في تحميل المحتوى. يرجى المحاولة مرة أخرى لاحقاً.",
+    "blogBackToAll": "← العودة إلى جميع المقالات"
   },
   "footer": {
     "about": "من نحن",
@@ -347,5 +350,20 @@
     "beautyCtaSubtitle": "دع فريق خبرائنا يجد لك أنسب منتجات الجمال الطبيعية لنوع بشرتك.",
     "beautyCtaButton": "احصل على استشارة مجانية",
     "loading": "جاري التحميل..."
+  },
+  "auth": {
+    "resetPasswordTitle": "إعادة تعيين كلمة المرور",
+    "resetPasswordSubtitle": "حدد كلمة مرورك الجديدة",
+    "newPasswordLabel": "كلمة المرور الجديدة",
+    "newPasswordPlaceholder": "8 أحرف على الأقل",
+    "confirmPasswordLabel": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+    "passwordTooShort": "يجب أن تكون كلمة المرور 8 أحرف على الأقل.",
+    "passwordMismatch": "كلمات المرور غير متطابقة.",
+    "passwordUpdateFailed": "فشل تحديث كلمة المرور.",
+    "passwordUpdated": "تم تحديث كلمة المرور!",
+    "redirectingToAccount": "جارٍ إعادة توجيهك إلى حسابك...",
+    "updating": "جارٍ التحديث...",
+    "updatePassword": "تحديث كلمة المرور"
   }
 }

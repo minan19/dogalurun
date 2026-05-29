@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -64,7 +64,10 @@ export default async function BlogPostPage({
   const { slug, locale } = await params;
   setRequestLocale(locale);
 
-  const article = await getArticle(slug);
+  const [t, article] = await Promise.all([
+    getTranslations({ locale, namespace: "blog" }),
+    getArticle(slug),
+  ]);
 
   if (!article) notFound();
 
@@ -135,7 +138,7 @@ export default async function BlogPostPage({
               href={`/${locale}/blog`}
               className="inline-flex items-center gap-2 text-[#556B2F] font-semibold hover:underline"
             >
-              ← Tüm Yazılara Dön
+              {t("blogBackToAll")}
             </Link>
           </div>
         </div>

@@ -74,7 +74,10 @@ export default async function BlogPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const articles = await getArticles();
+  const [t, articles] = await Promise.all([
+    getTranslations({ locale, namespace: "blog" }),
+    getArticles(),
+  ]);
   const featured = articles[0];
   const rest = articles.slice(1);
 
@@ -84,15 +87,15 @@ export default async function BlogPage({
       <main className="py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
-            <h1 className="text-2xl sm:text-3xl font-bold text-green-800">Sağlık & Beslenme Blog</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-green-800">{t("pageTitle")}</h1>
             <p className="mt-2 text-text-secondary text-sm">
-              Uzmanlarımız tarafından hazırlanan, bilime dayalı içerikler.
+              {t("blogSubtitle")}
             </p>
           </div>
 
           {articles.length === 0 ? (
             <div className="text-center py-20 text-text-secondary">
-              <p>İçerikler yüklenirken bir sorun oluştu. Lütfen daha sonra tekrar deneyin.</p>
+              <p>{t("blogLoadError")}</p>
             </div>
           ) : (
             <>

@@ -94,7 +94,10 @@
     "post3Excerpt": "Why is magnesium bisglycinate considered more effective for sleep than other forms?",
     "post3Author": "Nutr. Spec. Fatma Demir",
     "post3Date": "5 Mar 2026",
-    "post3ReadTime": "6"
+    "post3ReadTime": "6",
+    "blogSubtitle": "Science-based content prepared by our experts.",
+    "blogLoadError": "There was a problem loading content. Please try again later.",
+    "blogBackToAll": "← Back to All Posts"
   },
   "footer": {
     "about": "About Us",
@@ -347,5 +350,20 @@
     "beautyCtaSubtitle": "Let our expert team find the most suitable natural beauty products for your skin type.",
     "beautyCtaButton": "Get Free Consultation",
     "loading": "Loading..."
+  },
+  "auth": {
+    "resetPasswordTitle": "Reset Password",
+    "resetPasswordSubtitle": "Set your new password",
+    "newPasswordLabel": "New Password",
+    "newPasswordPlaceholder": "At least 8 characters",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-enter your password",
+    "passwordTooShort": "Password must be at least 8 characters.",
+    "passwordMismatch": "Passwords do not match.",
+    "passwordUpdateFailed": "Failed to update password.",
+    "passwordUpdated": "Password Updated!",
+    "redirectingToAccount": "Redirecting to your account...",
+    "updating": "Updating...",
+    "updatePassword": "Update Password"
   }
 }

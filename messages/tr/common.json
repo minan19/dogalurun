@@ -94,7 +94,10 @@
     "post3Excerpt": "Magnezyum bisglinat neden diğer formlara göre uyku için daha etkili kabul edilir?",
     "post3Author": "Uzm. Dyt. Fatma Demir",
     "post3Date": "5 Mar 2026",
-    "post3ReadTime": "6"
+    "post3ReadTime": "6",
+    "blogSubtitle": "Uzmanlarımız tarafından hazırlanan, bilime dayalı içerikler.",
+    "blogLoadError": "İçerikler yüklenirken bir sorun oluştu. Lütfen daha sonra tekrar deneyin.",
+    "blogBackToAll": "← Tüm Yazılara Dön"
   },
   "footer": {
     "about": "Hakkımızda",
@@ -347,5 +350,20 @@
     "beautyCtaSubtitle": "Cilt tipi ve ihtiyacınıza göre en uygun doğal güzellik ürünlerini uzman ekibimiz belirlesin.",
     "beautyCtaButton": "Ücretsiz Danışmanlık Al",
     "loading": "Yükleniyor..."
+  },
+  "auth": {
+    "resetPasswordTitle": "Şifre Sıfırlama",
+    "resetPasswordSubtitle": "Yeni şifrenizi belirleyin",
+    "newPasswordLabel": "Yeni Şifre",
+    "newPasswordPlaceholder": "En az 8 karakter",
+    "confirmPasswordLabel": "Şifre Tekrar",
+    "confirmPasswordPlaceholder": "Şifrenizi tekrar girin",
+    "passwordTooShort": "Şifre en az 8 karakter olmalıdır.",
+    "passwordMismatch": "Şifreler eşleşmiyor.",
+    "passwordUpdateFailed": "Şifre güncellenemedi.",
+    "passwordUpdated": "Şifreniz Güncellendi!",
+    "redirectingToAccount": "Hesabınıza yönlendiriliyorsunuz...",
+    "updating": "Güncelleniyor...",
+    "updatePassword": "Şifremi Güncelle"
   }
 }
