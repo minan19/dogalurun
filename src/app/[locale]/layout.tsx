@@ -3,6 +3,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Inter } from "next/font/google";
+import dynamic from "next/dynamic";
 import { routing } from "@/i18n/routing";
 import { isRtl } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
@@ -13,10 +14,11 @@ import { NavigationProgress } from "@/components/NavigationProgress";
 import { FloatingButtons } from "@/components/FloatingButtons";
 import { CartFlyAnimation } from "@/components/CartFlyAnimation";
 import { MobileNavBar } from "@/components/MobileNavBar";
-import { CookieBanner } from "@/components/CookieBanner";
 import { GeoDetector } from "@/components/GeoDetector";
 import { RegionalHealthBanner } from "@/components/RegionalHealthBanner";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+
+const CookieBanner = dynamic(() => import("@/components/CookieBanner").then((m) => m.CookieBanner), { ssr: false });
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],

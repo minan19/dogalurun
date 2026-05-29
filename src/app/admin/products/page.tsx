@@ -1,5 +1,16 @@
+import dynamic from "next/dynamic";
 import { AdminHeader } from "@/components/admin/AdminHeader";
-import { AdminProductsTable } from "@/components/admin/AdminProductsTable";
+
+const AdminProductsTable = dynamic(
+  () => import("@/components/admin/AdminProductsTable").then((m) => m.AdminProductsTable),
+  {
+    loading: () => (
+      <div className="flex-1 flex items-center justify-center py-20">
+        <div className="w-6 h-6 border-2 border-[#556B2F] border-t-transparent rounded-full animate-spin" />
+      </div>
+    ),
+  }
+);
 
 export default function AdminProductsPage() {
   return (
