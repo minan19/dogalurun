@@ -23,7 +23,9 @@
     "searchPopular": "Popular Searches",
     "sports": "Athletes",
     "beauty": "Beauty",
-    "home": "Home"
+    "home": "Home",
+    "mobileCartLabel": "My Cart",
+    "mobileRecommend": "Get Tips"
   },
   "hero": {
     "title": "Expert-approved natural and supplement products for your needs",

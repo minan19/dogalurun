@@ -23,7 +23,9 @@
     "searchPopular": "Popüler Aramalar",
     "sports": "Sporcular",
     "beauty": "Cilt & Güzellik",
-    "home": "Ana Sayfa"
+    "home": "Ana Sayfa",
+    "mobileCartLabel": "Sepetim",
+    "mobileRecommend": "Öneri Al"
   },
   "hero": {
     "title": "İhtiyacına uygun, uzman onaylı doğal ve takviye ürünler",
