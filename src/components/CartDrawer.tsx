@@ -1,6 +1,7 @@
 "use client";
 
 import { useCartStore } from "@/store/cartStore";
+import { useCouponStore } from "@/store/couponStore";
 import { useGeoStore } from "@/store/geoStore";
 import { Link } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
@@ -92,20 +93,26 @@ const cartTranslations = {
 } as const;
 
 export function CartDrawer() {
-  const { items, isOpen, closeCart, removeItem, updateQty, total, finalTotal, discountAmount, count, couponCode, couponDiscount, applyCoupon, removeCoupon } = useCartStore();
+  const { items, isOpen, closeCart, removeItem, updateQty, total, count } = useCartStore();
+  const { validateCoupon } = useCouponStore();
   const { isFreeShipping, freeShippingRemaining, formatPrice, getShippingCost } = useGeoStore();
   const [mounted, setMounted] = useState(false);
   const [couponInput, setCouponInput] = useState("");
+  const [couponApplied, setCouponApplied] = useState<{ code: string; discount: number; pct: number } | null>(null);
   const [couponError, setCouponError] = useState(false);
   useEffect(() => { setMounted(true); }, []);
   const params = useParams();
   const locale = ((params?.locale as string) ?? "tr") as LocaleKey;
   const t = cartTranslations[locale] ?? cartTranslations.tr;
 
+  const discountAmount = couponApplied?.discount ?? 0;
+  const finalTotal = total() - discountAmount;
+
   function handleApplyCoupon() {
     if (!couponInput.trim()) return;
-    const ok = applyCoupon(couponInput.trim());
-    if (ok) {
+    const result = validateCoupon(couponInput.trim(), total());
+    if (result.valid) {
+      setCouponApplied({ code: couponInput.trim().toUpperCase(), discount: result.discount, pct: result.pct });
       setCouponInput("");
       setCouponError(false);
     } else {
@@ -258,13 +265,13 @@ export function CartDrawer() {
             </div>
 
             {/* Kupon kodu */}
-            {couponCode ? (
+            {couponApplied ? (
               <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-xl px-3 py-2">
                 <span className="text-xs font-semibold text-green-700">
-                  🎁 {t.couponApplied(couponCode, couponDiscount)}
+                  🎁 {t.couponApplied(couponApplied.code, couponApplied.pct)}
                 </span>
                 <button
-                  onClick={removeCoupon}
+                  onClick={() => setCouponApplied(null)}
                   className="text-[11px] text-red-500 hover:text-red-700 font-semibold ml-2 shrink-0"
                 >
                   {t.couponRemove}
@@ -296,32 +303,32 @@ export function CartDrawer() {
 
             {/* Toplam */}
             <div className="flex flex-col gap-1">
-              {discountAmount() > 0 && (
+              {discountAmount > 0 && (
                 <>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-secondary">{t.subtotal}</span>
                     <span className="text-text-secondary">{formatPrice(total())}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm text-green-700">
-                    <span className="font-medium">{t.discount} ({couponDiscount}%)</span>
-                    <span className="font-medium">− {formatPrice(discountAmount())}</span>
+                    <span className="font-medium">{t.discount} ({couponApplied!.pct}%)</span>
+                    <span className="font-medium">− {formatPrice(discountAmount)}</span>
                   </div>
                   <div className="border-t border-olive-border/20 pt-1 flex items-center justify-between">
                     <span className="text-sm font-semibold text-green-900">{t.total}</span>
                     <div className="text-right">
                       <span className="text-lg font-bold text-green-800">
-                        {formatPrice(finalTotal())}
+                        {formatPrice(finalTotal)}
                       </span>
-                      {getShippingCost(finalTotal()) > 0 && (
+                      {getShippingCost(finalTotal) > 0 && (
                         <p className="text-[10px] text-text-secondary/60 mt-0.5">
-                          + {formatPrice(getShippingCost(finalTotal()))} kargo
+                          + {formatPrice(getShippingCost(finalTotal))} kargo
                         </p>
                       )}
                     </div>
                   </div>
                 </>
               )}
-              {discountAmount() === 0 && (
+              {discountAmount === 0 && (
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-text-secondary">{t.subtotal}</span>
                   <div className="text-right">

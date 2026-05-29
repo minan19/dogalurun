@@ -365,5 +365,12 @@
     "redirectingToAccount": "جارٍ إعادة توجيهك إلى حسابك...",
     "updating": "جارٍ التحديث...",
     "updatePassword": "تحديث كلمة المرور"
+  },
+  "orderTracking": {
+    "title": "تتبع الطلب",
+    "subtitle": "أدخل رقم طلبك للاطلاع على حالة التوصيل."
+  },
+  "checkout": {
+    "pageTitle": "الدفع"
   }
 }

@@ -365,5 +365,12 @@
     "redirectingToAccount": "Redirecting to your account...",
     "updating": "Updating...",
     "updatePassword": "Update Password"
+  },
+  "orderTracking": {
+    "title": "Order Tracking",
+    "subtitle": "Enter your order number to check your delivery status."
+  },
+  "checkout": {
+    "pageTitle": "Checkout"
   }
 }

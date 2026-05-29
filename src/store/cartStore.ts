@@ -7,34 +7,17 @@ export interface CartItem {
   quantity: number;
 }
 
-// Valid coupon codes: code → discount percentage
-const COUPONS: Record<string, number> = {
-  HOSGELDIN: 10,
-  SIFA15: 15,
-  SIFA20: 20,
-};
-
-export function validateCoupon(code: string): number | null {
-  return COUPONS[code.toUpperCase()] ?? null;
-}
-
 interface CartStore {
   items: CartItem[];
   isOpen: boolean;
   lastAdded: number;
-  couponCode: string | null;
-  couponDiscount: number; // percentage 0-100
   addItem: (product: Product) => void;
   removeItem: (productId: string) => void;
   updateQty: (productId: string, qty: number) => void;
   clearCart: () => void;
   openCart: () => void;
   closeCart: () => void;
-  applyCoupon: (code: string) => boolean;
-  removeCoupon: () => void;
   total: () => number;
-  discountAmount: () => number;
-  finalTotal: () => number;
   count: () => number;
 }
 
@@ -44,8 +27,6 @@ export const useCartStore = create<CartStore>()(
       items: [],
       isOpen: false,
       lastAdded: 0,
-      couponCode: null,
-      couponDiscount: 0,
 
       addItem: (product) => {
         set((state) => {
@@ -77,31 +58,12 @@ export const useCartStore = create<CartStore>()(
         }));
       },
 
-      clearCart: () => set({ items: [], couponCode: null, couponDiscount: 0 }),
+      clearCart: () => set({ items: [] }),
       openCart: () => set({ isOpen: true }),
       closeCart: () => set({ isOpen: false }),
 
-      applyCoupon: (code) => {
-        const discount = validateCoupon(code);
-        if (discount !== null) {
-          set({ couponCode: code.toUpperCase(), couponDiscount: discount });
-          return true;
-        }
-        return false;
-      },
-
-      removeCoupon: () => set({ couponCode: null, couponDiscount: 0 }),
-
       total: () =>
         get().items.reduce((sum, i) => sum + i.product.price * i.quantity, 0),
-
-      discountAmount: () => {
-        const { couponDiscount } = get();
-        if (!couponDiscount) return 0;
-        return Math.round(get().total() * couponDiscount / 100);
-      },
-
-      finalTotal: () => get().total() - get().discountAmount(),
 
       count: () =>
         get().items.reduce((sum, i) => sum + i.quantity, 0),

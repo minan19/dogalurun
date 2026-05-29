@@ -365,5 +365,12 @@
     "redirectingToAccount": "Hesabınıza yönlendiriliyorsunuz...",
     "updating": "Güncelleniyor...",
     "updatePassword": "Şifremi Güncelle"
+  },
+  "orderTracking": {
+    "title": "Sipariş Takibi",
+    "subtitle": "Sipariş numaranızı girerek teslimat durumunu öğrenin."
+  },
+  "checkout": {
+    "pageTitle": "Ödeme"
   }
 }
