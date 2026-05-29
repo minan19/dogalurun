@@ -61,6 +61,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   if (!product) notFound();
 
   const t = await getTranslations("products");
+  const tNav = await getTranslations("nav");
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
@@ -104,7 +105,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-text-secondary mb-8">
-            <Link href="/" className="hover:text-green-700 transition-colors">Ana Sayfa</Link>
+            <Link href="/" className="hover:text-green-700 transition-colors">{tNav("home")}</Link>
             <span>/</span>
             <Link href="/products" className="hover:text-green-700 transition-colors">{t("pageTitle")}</Link>
             <span>/</span>
@@ -238,7 +239,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             if (similar.length === 0) return null;
             return (
               <section className="mt-16">
-                <h2 className="text-xl font-bold text-green-900 mb-6">Benzer Ürünler</h2>
+                <h2 className="text-xl font-bold text-green-900 mb-6">{t("similarProducts")}</h2>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   {similar.map(p => {
                     const nameKey = `name_${p.nameKey}` as Parameters<typeof t>[0];
