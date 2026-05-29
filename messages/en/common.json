@@ -112,20 +112,8 @@
     "expertNote": "All products are selected by our expert consultants."
   },
   "about": {
-    "title": "About Us",
-    "subtitle": "Bringing the power of nature together with science",
-    "story": "Hüda-i Şifa was founded to offer natural and supplement products with expert consultation. Our goal is to deliver the right products from the most reliable sources on your healthy living journey.",
-    "mission": "Our Mission",
-    "missionText": "To ensure everyone can easily access science-based, natural, and reliable supplement products suited to their needs.",
-    "vision": "Our Vision",
-    "visionText": "To make healthy living accessible for everyone as Turkey's most trusted natural product platform.",
-    "values": "Our Values",
-    "value1Title": "Trust",
-    "value1Text": "All our products are expert-approved and made from tested ingredients.",
-    "value2Title": "Naturalness",
-    "value2Text": "We use the best raw materials that nature has to offer.",
-    "value3Title": "Transparency",
-    "value3Text": "We openly share ingredient information and expert notes."
+    "pageTitle": "About Us",
+    "pageDesc": "We offer expert-approved, scientifically backed natural products with confidence."
   },
   "experts": {
     "title": "Our Experts",
@@ -141,30 +129,8 @@
     "expert3Bio": "Working in clinical nutrition and dietary supplement consulting."
   },
   "contact": {
-    "title": "Contact",
-    "subtitle": "Reach out to us with your questions",
-    "nameLabel": "Your Name",
-    "namePlaceholder": "Enter your name",
-    "emailLabel": "Email",
-    "emailPlaceholder": "example@mail.com",
-    "subjectLabel": "Subject",
-    "subjectPlaceholder": "Subject title",
-    "messageLabel": "Your Message",
-    "messagePlaceholder": "Write your message...",
-    "send": "Send",
-    "address": "Address",
-    "addressText": "Istanbul, Turkey",
-    "phone": "Phone",
-    "phoneText": "+90 (212) 000 00 00",
-    "email": "Email",
-    "emailText": "info@hudaisifa.com",
-    "workingHours": "Working Hours",
-    "workingHoursText": "Monday - Saturday: 09:00 - 18:00",
-    "sending": "Sending...",
-    "successMessage": "Your message has been received. We'll get back to you soon.",
-    "successTitle": "Message Received!",
-    "successBody": "We'll get back to you within 1 business day.",
-    "sendAnother": "Send another message"
+    "pageTitle": "Contact",
+    "pageDesc": "Reach us for your questions. Customer service available weekdays 09-18."
   },
   "notFound": {
     "title": "Page Not Found",
@@ -372,5 +338,9 @@
   },
   "checkout": {
     "pageTitle": "Checkout"
+  },
+  "recommendations": {
+    "pageTitle": "Personalized Product Recommendations",
+    "pageDesc": "Find the most suitable natural supplements for your needs in 6 short questions."
   }
 }

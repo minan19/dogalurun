@@ -71,7 +71,7 @@ export default async function BlogPostPage({
 
   if (!article) notFound();
 
-  const publishedDate = new Date(article.published_at).toLocaleDateString("tr-TR", {
+  const publishedDate = new Date(article.published_at).toLocaleDateString(locale, {
     year: "numeric",
     month: "long",
     day: "numeric",

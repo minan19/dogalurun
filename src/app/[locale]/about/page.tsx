@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Header } from "@/components/Header";
-
-export const metadata: Metadata = {
-  title: "Hakkımızda | Hüda-i Şifa",
-  description: "Hüda-i Şifa olarak uzman onaylı, bilimsel destekli doğal ürünleri güvenle sunuyoruz.",
-  openGraph: { title: "Hakkımızda | Hüda-i Şifa", images: [{ url: "/logo.png" }] },
-};
 import { Footer } from "@/components/Footer";
 import { AboutContent } from "@/components/AboutContent";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "about" });
+  const title = `${t("pageTitle")} | Hüda-i Şifa`;
+  return { title, description: t("pageDesc"), openGraph: { title, images: [{ url: "/logo.png" }] } };
+}
 
 export default async function AboutPage({
   params,

@@ -112,20 +112,8 @@
     "expertNote": "Tüm ürünler uzman danışmanlarımız tarafından seçilmiştir."
   },
   "about": {
-    "title": "Hakkımızda",
-    "subtitle": "Doğanın gücünü bilimle buluşturuyoruz",
-    "story": "Hüda-i Şifa, doğal ve takviye edici ürünleri uzman danışmanlığıyla sunmak amacıyla kurulmuştur. Amacımız, sağlıklı yaşam yolculuğunuzda size en doğru ürünleri, en güvenilir kaynaklardan ulaştırmaktır.",
-    "mission": "Misyonumuz",
-    "missionText": "Her bireyin ihtiyacına uygun, bilimsel temelli, doğal ve güvenilir takviye ürünlere kolayca ulaşmasını sağlamak.",
-    "vision": "Vizyonumuz",
-    "visionText": "Türkiye'nin en güvenilir doğal ürün platformu olarak, sağlıklı yaşamı herkes için erişilebilir kılmak.",
-    "values": "Değerlerimiz",
-    "value1Title": "Güven",
-    "value1Text": "Tüm ürünlerimiz uzman onaylıdır ve test edilmiş içeriklerden oluşur.",
-    "value2Title": "Doğallık",
-    "value2Text": "Doğanın sunduğu en iyi hammaddeleri kullanıyoruz.",
-    "value3Title": "Şeffaflık",
-    "value3Text": "İçerik bilgilerini ve uzman notlarını açıkça paylaşıyoruz."
+    "pageTitle": "Hakkımızda",
+    "pageDesc": "Uzman onaylı, bilimsel destekli doğal ürünleri güvenle sunuyoruz."
   },
   "experts": {
     "title": "Uzmanlarımız",
@@ -141,30 +129,8 @@
     "expert3Bio": "Klinik beslenme ve takviye edici gıda danışmanlığı alanında çalışmaktadır."
   },
   "contact": {
-    "title": "İletişim",
-    "subtitle": "Sorularınız için bize ulaşın",
-    "nameLabel": "Adınız",
-    "namePlaceholder": "Adınızı giriniz",
-    "emailLabel": "E-posta",
-    "emailPlaceholder": "ornek@mail.com",
-    "subjectLabel": "Konu",
-    "subjectPlaceholder": "Konu başlığı",
-    "messageLabel": "Mesajınız",
-    "messagePlaceholder": "Mesajınızı yazınız...",
-    "send": "Gönder",
-    "address": "Adres",
-    "addressText": "İstanbul, Türkiye",
-    "phone": "Telefon",
-    "phoneText": "+90 (212) 000 00 00",
-    "email": "E-posta",
-    "emailText": "info@hudaisifa.com",
-    "workingHours": "Çalışma Saatleri",
-    "workingHoursText": "Pazartesi - Cumartesi: 09:00 - 18:00",
-    "sending": "Gönderiliyor...",
-    "successMessage": "Mesajınız iletildi, en kısa sürede dönüş yapacağız.",
-    "successTitle": "Mesajınız Alındı!",
-    "successBody": "En geç 1 iş günü içinde size dönüş yapacağız.",
-    "sendAnother": "Yeni mesaj gönder"
+    "pageTitle": "İletişim",
+    "pageDesc": "Sorularınız için bize ulaşın. Hafta içi 09-18 saatleri arasında müşteri hizmetleri."
   },
   "notFound": {
     "title": "Sayfa Bulunamadı",
@@ -372,5 +338,9 @@
   },
   "checkout": {
     "pageTitle": "Ödeme"
+  },
+  "recommendations": {
+    "pageTitle": "Size Özel Ürün Önerisi",
+    "pageDesc": "6 kısa soruyla ihtiyacınıza en uygun doğal takviye ürünlerini bulun. Uzman onaylı öneriler."
   }
 }
