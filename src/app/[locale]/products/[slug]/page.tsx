@@ -9,6 +9,7 @@ import { getProductBySlug, products } from "@/data/products";
 import { ProductDetailActions } from "@/components/ProductDetailActions";
 import { ProductDetailImage } from "@/components/ProductDetailImage";
 import { ShareButton } from "@/components/ShareButton";
+import { SocialProofBadge } from "@/components/SocialProofBadge";
 import { ProductReviews } from "@/components/ProductReviews";
 import { RecentlyViewedTracker } from "@/components/RecentlyViewedTracker";
 import { StickyCartBar } from "@/components/StickyCartBar";
@@ -76,10 +77,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     new: { label: t("badgeNew"), cls: "bg-green-600 text-white" },
   };
 
+  const productName = t(`name_${product.nameKey}`);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: t(`name_${product.nameKey}`),
+    name: productName,
     description: t(`desc_${product.descriptionKey}`),
     image: product.image || undefined,
     brand: { "@type": "Brand", name: product.brand },
@@ -97,12 +100,20 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     },
   };
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: tNav("home"), item: `${SITE}/${locale}` },
+      { "@type": "ListItem", position: 2, name: t("pageTitle"), item: `${SITE}/${locale}/products` },
+      { "@type": "ListItem", position: 3, name: productName, item: `${SITE}/${locale}/products/${product.slug}` },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-cream-50">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <Header />
       <main className="py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -165,6 +176,9 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                   {product.rating} · {product.reviewCount} {t("reviews")}
                 </span>
               </div>
+
+              {/* Sosyal kanıt */}
+              <SocialProofBadge productId={product.id} />
 
               {/* Uzman notu */}
               {product.expertNoteKey && (
