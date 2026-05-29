@@ -46,6 +46,14 @@ body {
   animation: cart-fly 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slide-up 0.2s ease-out both;
+}
+
 @keyframes progress-bar {
   0%   { transform: translateX(-100%); }
   50%  { transform: translateX(-20%); }

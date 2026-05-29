@@ -8,6 +8,7 @@ import { getProductBySlug, products } from "@/data/products";
 import { ProductDetailActions } from "@/components/ProductDetailActions";
 import { ProductReviews } from "@/components/ProductReviews";
 import { RecentlyViewedTracker } from "@/components/RecentlyViewedTracker";
+import { StickyCartBar } from "@/components/StickyCartBar";
 
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -176,10 +177,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               )}
 
               {/* Fiyat & Sepet */}
-              <ProductDetailActions
-                product={product}
-                addToCartLabel={t("addToCart")}
-              />
+              <div id="product-actions">
+                <ProductDetailActions
+                  product={product}
+                  addToCartLabel={t("addToCart")}
+                />
+              </div>
 
               {/* İçerik & Kullanım */}
               <div className="space-y-4">
@@ -284,6 +287,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         </div>
       </main>
       <Footer />
+      <StickyCartBar product={product} watchId="product-actions" />
     </div>
   );
 }

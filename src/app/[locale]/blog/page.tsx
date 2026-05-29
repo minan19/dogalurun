@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -101,7 +102,7 @@ export default async function BlogPage({
             <>
               {/* Öne çıkan yazı */}
               {featured && (
-                <div className="bg-white rounded-2xl border border-olive-border/30 overflow-hidden mb-8 hover:shadow-lg transition-all group cursor-pointer">
+                <Link href={`/${locale}/blog/${featured.slug}`} className="block bg-white rounded-2xl border border-olive-border/30 overflow-hidden mb-8 hover:shadow-lg transition-all group">
                   {featured.image ? (
                     <div className="relative h-48 sm:h-64 overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -146,16 +147,17 @@ export default async function BlogPage({
                       )}
                     </div>
                   </div>
-                </div>
+                </Link>
               )}
 
               {/* Diğer yazılar */}
               {rest.length > 0 && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                   {rest.map((article) => (
-                    <div
+                    <Link
                       key={article.id}
-                      className="bg-white rounded-2xl border border-olive-border/30 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all group cursor-pointer"
+                      href={`/${locale}/blog/${article.slug}`}
+                      className="block bg-white rounded-2xl border border-olive-border/30 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all group"
                     >
                       {article.image ? (
                         <div className="relative h-36 overflow-hidden">
@@ -201,7 +203,7 @@ export default async function BlogPage({
                           )}
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               )}
