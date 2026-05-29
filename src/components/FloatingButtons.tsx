@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function FloatingButtons() {
+  const t = useTranslations("nav");
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
@@ -17,7 +19,7 @@ export function FloatingButtons() {
     <div className="fixed bottom-24 right-4 z-40">
       <button
         onClick={scrollToTop}
-        aria-label="Sayfanın başına git"
+        aria-label={t("backToTop")}
         className={`w-10 h-10 rounded-full flex items-center justify-center shadow-lg bg-green-700 text-white hover:bg-green-800 active:scale-95 transition-[opacity,transform,colors] duration-300 ${
           showTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
         }`}
