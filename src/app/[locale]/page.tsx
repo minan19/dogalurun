@@ -11,6 +11,7 @@ import { ExpertNote } from "@/components/ExpertNote";
 import { Footer } from "@/components/Footer";
 import { SportsBanner } from "@/components/SportsBanner";
 import { BeautyBanner } from "@/components/BeautyBanner";
+import { NewsletterSection } from "@/components/NewsletterSection";
 
 const SITE = "https://hudaisifa.com";
 const locales = ["tr", "en", "ar", "ru"] as const;
@@ -69,6 +70,7 @@ export default async function HomePage({
         <BeautyBanner />
         <BlogTeaser />
         <ExpertNote />
+        <NewsletterSection />
       </main>
       <Footer />
     </div>
