@@ -21,6 +21,13 @@ const cartTranslations = {
     ssl: "SSL",
     secure: "3D Secure",
     fastShipping: "Hızlı Kargo",
+    couponPlaceholder: "İndirim kodu",
+    couponApply: "Uygula",
+    couponApplied: (code: string, pct: number) => `${code} — %${pct} indirim uygulandı`,
+    couponRemove: "Kaldır",
+    couponInvalid: "Geçersiz kod",
+    discount: "İndirim",
+    total: "Toplam",
   },
   en: {
     dir: "ltr",
@@ -34,6 +41,13 @@ const cartTranslations = {
     ssl: "SSL",
     secure: "3D Secure",
     fastShipping: "Fast Delivery",
+    couponPlaceholder: "Discount code",
+    couponApply: "Apply",
+    couponApplied: (code: string, pct: number) => `${code} — ${pct}% discount applied`,
+    couponRemove: "Remove",
+    couponInvalid: "Invalid code",
+    discount: "Discount",
+    total: "Total",
   },
   ar: {
     dir: "rtl",
@@ -47,6 +61,13 @@ const cartTranslations = {
     ssl: "SSL",
     secure: "3D Secure",
     fastShipping: "توصيل سريع",
+    couponPlaceholder: "كود الخصم",
+    couponApply: "تطبيق",
+    couponApplied: (code: string, pct: number) => `${code} — خصم ${pct}٪ مُطبَّق`,
+    couponRemove: "إزالة",
+    couponInvalid: "كود غير صالح",
+    discount: "الخصم",
+    total: "الإجمالي",
   },
   ru: {
     dir: "ltr",
@@ -60,17 +81,37 @@ const cartTranslations = {
     ssl: "SSL",
     secure: "3D Secure",
     fastShipping: "Быстрая доставка",
+    couponPlaceholder: "Промокод",
+    couponApply: "Применить",
+    couponApplied: (code: string, pct: number) => `${code} — скидка ${pct}% применена`,
+    couponRemove: "Убрать",
+    couponInvalid: "Неверный код",
+    discount: "Скидка",
+    total: "Итого",
   },
 } as const;
 
 export function CartDrawer() {
-  const { items, isOpen, closeCart, removeItem, updateQty, total, count } = useCartStore();
+  const { items, isOpen, closeCart, removeItem, updateQty, total, finalTotal, discountAmount, count, couponCode, couponDiscount, applyCoupon, removeCoupon } = useCartStore();
   const { isFreeShipping, freeShippingRemaining, formatPrice, getShippingCost } = useGeoStore();
   const [mounted, setMounted] = useState(false);
+  const [couponInput, setCouponInput] = useState("");
+  const [couponError, setCouponError] = useState(false);
   useEffect(() => { setMounted(true); }, []);
   const params = useParams();
   const locale = ((params?.locale as string) ?? "tr") as LocaleKey;
   const t = cartTranslations[locale] ?? cartTranslations.tr;
+
+  function handleApplyCoupon() {
+    if (!couponInput.trim()) return;
+    const ok = applyCoupon(couponInput.trim());
+    if (ok) {
+      setCouponInput("");
+      setCouponError(false);
+    } else {
+      setCouponError(true);
+    }
+  }
 
   // ESC ile kapat
   useEffect(() => {
@@ -216,19 +257,85 @@ export function CartDrawer() {
                 : t.addMore(formatPrice(freeShippingRemaining(total())))}
             </div>
 
-            {/* Toplam */}
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-text-secondary">{t.subtotal}</span>
-              <div className="text-right">
-                <span className="text-lg font-bold text-green-800">
-                  {formatPrice(total())}
+            {/* Kupon kodu */}
+            {couponCode ? (
+              <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-xl px-3 py-2">
+                <span className="text-xs font-semibold text-green-700">
+                  🎁 {t.couponApplied(couponCode, couponDiscount)}
                 </span>
-                {getShippingCost(total()) > 0 && (
-                  <p className="text-[10px] text-text-secondary/60 mt-0.5">
-                    + {formatPrice(getShippingCost(total()))} kargo
-                  </p>
-                )}
+                <button
+                  onClick={removeCoupon}
+                  className="text-[11px] text-red-500 hover:text-red-700 font-semibold ml-2 shrink-0"
+                >
+                  {t.couponRemove}
+                </button>
               </div>
+            ) : (
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={couponInput}
+                  onChange={(e) => { setCouponInput(e.target.value.toUpperCase()); setCouponError(false); }}
+                  onKeyDown={(e) => e.key === "Enter" && handleApplyCoupon()}
+                  placeholder={t.couponPlaceholder}
+                  className={`flex-1 text-xs px-3 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600/20 focus:border-green-600 bg-cream-50 ${
+                    couponError ? "border-red-300 text-red-600" : "border-olive-border/40"
+                  }`}
+                />
+                <button
+                  onClick={handleApplyCoupon}
+                  className="text-xs font-semibold px-3 py-2 bg-green-700 hover:bg-green-800 text-white rounded-xl transition-colors shrink-0"
+                >
+                  {t.couponApply}
+                </button>
+              </div>
+            )}
+            {couponError && (
+              <p className="text-[11px] text-red-500 -mt-1">{t.couponInvalid}</p>
+            )}
+
+            {/* Toplam */}
+            <div className="flex flex-col gap-1">
+              {discountAmount() > 0 && (
+                <>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-text-secondary">{t.subtotal}</span>
+                    <span className="text-text-secondary">{formatPrice(total())}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm text-green-700">
+                    <span className="font-medium">{t.discount} ({couponDiscount}%)</span>
+                    <span className="font-medium">− {formatPrice(discountAmount())}</span>
+                  </div>
+                  <div className="border-t border-olive-border/20 pt-1 flex items-center justify-between">
+                    <span className="text-sm font-semibold text-green-900">{t.total}</span>
+                    <div className="text-right">
+                      <span className="text-lg font-bold text-green-800">
+                        {formatPrice(finalTotal())}
+                      </span>
+                      {getShippingCost(finalTotal()) > 0 && (
+                        <p className="text-[10px] text-text-secondary/60 mt-0.5">
+                          + {formatPrice(getShippingCost(finalTotal()))} kargo
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </>
+              )}
+              {discountAmount() === 0 && (
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-text-secondary">{t.subtotal}</span>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-green-800">
+                      {formatPrice(total())}
+                    </span>
+                    {getShippingCost(total()) > 0 && (
+                      <p className="text-[10px] text-text-secondary/60 mt-0.5">
+                        + {formatPrice(getShippingCost(total()))} kargo
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Ödemeye Geç */}
