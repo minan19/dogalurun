@@ -7,6 +7,7 @@ import { CategoryTabs } from "@/components/CategoryTabs";
 import { ProductsGrid } from "@/components/ProductsGrid";
 import { Suspense } from "react";
 import { SortSelect } from "@/components/SortSelect";
+import { ProductGridSkeleton } from "@/components/ProductCardSkeleton";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -69,7 +70,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
           </div>
 
           {/* Ürün grid — productStore'dan okur, admin değişikliklerini anında gösterir */}
-          <Suspense fallback={<div className="text-center py-20 text-text-secondary">Yükleniyor...</div>}>
+          <Suspense fallback={<ProductGridSkeleton count={8} />}>
             <ProductsGrid
               category={category}
               need={need}
