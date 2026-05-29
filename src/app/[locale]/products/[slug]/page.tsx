@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { getProductBySlug, products } from "@/data/products";
 import { ProductDetailActions } from "@/components/ProductDetailActions";
 import { ProductDetailImage } from "@/components/ProductDetailImage";
+import { ShareButton } from "@/components/ShareButton";
 import { ProductReviews } from "@/components/ProductReviews";
 import { RecentlyViewedTracker } from "@/components/RecentlyViewedTracker";
 import { StickyCartBar } from "@/components/StickyCartBar";
@@ -129,7 +130,15 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             <div className="flex flex-col gap-6">
               {/* Başlık */}
               <div>
-                <span className="text-sm text-text-secondary">{product.amount} · {product.brand}</span>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-text-secondary">{product.amount} · {product.brand}</span>
+                  <ShareButton
+                    title={t(`name_${product.nameKey}`)}
+                    url={`${SITE}/${locale}/products/${product.slug}`}
+                    label={t("shareProduct")}
+                    copiedLabel={t("shareCopied")}
+                  />
+                </div>
                 <h1 className="mt-2 text-2xl sm:text-3xl font-bold text-green-900 leading-tight">
                   {t(`name_${product.nameKey}`)}
                 </h1>
