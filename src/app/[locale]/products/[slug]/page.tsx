@@ -17,6 +17,9 @@ export async function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
+const SITE = "https://hudaisifa.com";
+const locales = ["tr", "en", "ar", "ru"] as const;
+
 export async function generateMetadata({ params }: ProductDetailPageProps) {
   const { locale, slug } = await params;
   const product = getProductBySlug(slug);
@@ -24,20 +27,28 @@ export async function generateMetadata({ params }: ProductDetailPageProps) {
   const messages = (await import(`../../../../../messages/${locale}/common.json`)).default;
   const t = messages.products;
   const name = t?.[`name_${product.nameKey}`] ?? product.nameKey;
+  const desc = t?.[`desc_${product.descriptionKey}`] ?? "";
   return {
     title: `${name} | Hüda-i Şifa`,
-    description: t?.[`desc_${product.descriptionKey}`] ?? "",
+    description: desc,
     openGraph: {
       title: `${name} | Hüda-i Şifa`,
-      description: t?.[`desc_${product.descriptionKey}`] ?? "",
+      description: desc,
       images: product.image ? [{ url: product.image, width: 600, height: 600, alt: name }] : [],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: `${name} | Hüda-i Şifa`,
-      description: t?.[`desc_${product.descriptionKey}`] ?? "",
+      description: desc,
       images: product.image ? [product.image] : [],
+    },
+    alternates: {
+      canonical: `${SITE}/${locale}/products/${slug}`,
+      languages: Object.fromEntries([
+        ...locales.map((l) => [l, `${SITE}/${l}/products/${slug}`]),
+        ["x-default", `${SITE}/tr/products/${slug}`],
+      ]),
     },
   };
 }
