@@ -38,13 +38,13 @@ export function WishlistContent() {
         <svg className="w-16 h-16 text-text-secondary/20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
-        <p className="text-text-secondary text-lg font-medium">İstek listeniz boş</p>
-        <p className="text-text-secondary/60 text-sm">Beğendiğiniz ürünleri kaydetmek için kalp ikonuna tıklayın.</p>
+        <p className="text-text-secondary text-lg font-medium">{t("wishlistEmpty")}</p>
+        <p className="text-text-secondary/60 text-sm">{t("wishlistEmptyHint")}</p>
         <Link
           href="/products"
           className="mt-2 bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors"
         >
-          Ürünleri İncele
+          {t("wishlistBrowse")}
         </Link>
       </div>
     );
@@ -74,7 +74,7 @@ export function WishlistContent() {
               <button
                 onClick={(e) => { e.preventDefault(); toggle(product.id); }}
                 className="absolute top-3 right-3 p-1.5 rounded-full bg-white/90 text-red-500 transition-colors hover:bg-red-50"
-                aria-label="Listeden çıkar"
+                aria-label={t("wishlistRemove")}
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
