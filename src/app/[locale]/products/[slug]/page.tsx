@@ -16,6 +16,7 @@ import { StickyCartBar } from "@/components/StickyCartBar";
 import { DealCountdown } from "@/components/DealCountdown";
 import { ProductFAQ } from "@/components/ProductFAQ";
 import { StockAlertButton } from "@/components/StockAlertButton";
+import { FrequentlyBoughtTogether } from "@/components/FrequentlyBoughtTogether";
 
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -215,6 +216,26 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               {(!product.inStock || product.stock === 0) && (
                 <StockAlertButton productId={product.id} locale={locale} />
               )}
+
+              {/* Sık birlikte alınan ürünler */}
+              {(() => {
+                const bundleItems = products
+                  .filter(p =>
+                    p.id !== product.id &&
+                    p.inStock &&
+                    p.stock > 0 &&
+                    (p.needs.some(n => product.needs.includes(n)) || p.category === product.category)
+                  )
+                  .slice(0, 2);
+                if (bundleItems.length === 0) return null;
+                return (
+                  <FrequentlyBoughtTogether
+                    mainProduct={product}
+                    bundleProducts={bundleItems}
+                    productNames={Object.fromEntries(products.map(p => [p.id, t(`name_${p.nameKey}` as Parameters<typeof t>[0])]))}
+                  />
+                );
+              })()}
 
               {/* Teslimat tahmini */}
               {product.inStock && product.stock > 0 && (
