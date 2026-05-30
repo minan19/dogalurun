@@ -7,6 +7,7 @@ import { locales, type Locale } from "@/i18n/config";
 import { useRouter } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
 import { useCartStore } from "@/store/cartStore";
+import { useWishlistStore } from "@/store/wishlistStore";
 import { SearchOverlay } from "@/components/SearchOverlay";
 import { CurrencySelector } from "@/components/CurrencySelector";
 import Image from "next/image";
@@ -43,6 +44,7 @@ export function Header() {
   const t = useTranslations("nav");
   const [mobileOpen, setMobileOpen] = useState(false);
   const { openCart, count } = useCartStore();
+  const wishlistCount = useWishlistStore((s) => s.count());
   const [mounted, setMounted] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   useEffect(() => { setMounted(true); }, []);
@@ -146,6 +148,22 @@ export function Header() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
               </button>
+
+              {/* Wishlist */}
+              <Link
+                href="/wishlist"
+                className="relative hidden sm:flex text-text-secondary hover:text-red-500 transition-colors"
+                aria-label={t("wishlist")}
+              >
+                <svg className="w-5 h-5" fill={mounted && wishlistCount > 0 ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                </svg>
+                {mounted && wishlistCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                    {wishlistCount > 9 ? "9+" : wishlistCount}
+                  </span>
+                )}
+              </Link>
 
               {/* Account + Admin Dropdown */}
               <div className="relative group">
