@@ -15,6 +15,7 @@ import { RecentlyViewedTracker } from "@/components/RecentlyViewedTracker";
 import { StickyCartBar } from "@/components/StickyCartBar";
 import { DealCountdown } from "@/components/DealCountdown";
 import { ProductFAQ } from "@/components/ProductFAQ";
+import { StockAlertButton } from "@/components/StockAlertButton";
 
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -209,6 +210,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                   addToCartLabel={t("addToCart")}
                 />
               </div>
+
+              {/* Stok tükendi bildirimi */}
+              {(!product.inStock || product.stock === 0) && (
+                <StockAlertButton productId={product.id} locale={locale} />
+              )}
 
               {/* Teslimat tahmini */}
               {product.inStock && product.stock > 0 && (
