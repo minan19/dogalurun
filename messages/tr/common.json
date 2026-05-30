@@ -322,7 +322,9 @@
     "beautyCtaTitle": "Gerçek Güzellik Doğadan Gelir",
     "beautyCtaSubtitle": "Cilt tipi ve ihtiyacınıza göre en uygun doğal güzellik ürünlerini uzman ekibimiz belirlesin.",
     "beautyCtaButton": "Ücretsiz Danışmanlık Al",
-    "loading": "Yükleniyor..."
+    "loading": "Yükleniyor...",
+    "viewDetails": "Ürün Detayına Git",
+    "quickView": "Hızlı Önizleme"
   },
   "auth": {
     "resetPasswordTitle": "Şifre Sıfırlama",

@@ -322,7 +322,9 @@
     "beautyCtaTitle": "الجمال الحقيقي يأتي من الطبيعة",
     "beautyCtaSubtitle": "دع فريق خبرائنا يجد لك أنسب منتجات الجمال الطبيعية لنوع بشرتك.",
     "beautyCtaButton": "احصل على استشارة مجانية",
-    "loading": "جاري التحميل..."
+    "loading": "جاري التحميل...",
+    "viewDetails": "عرض التفاصيل",
+    "quickView": "عرض سريع"
   },
   "auth": {
     "resetPasswordTitle": "إعادة تعيين كلمة المرور",

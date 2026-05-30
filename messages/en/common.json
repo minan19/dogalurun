@@ -322,7 +322,9 @@
     "beautyCtaTitle": "True Beauty Comes from Nature",
     "beautyCtaSubtitle": "Let our expert team find the most suitable natural beauty products for your skin type.",
     "beautyCtaButton": "Get Free Consultation",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "viewDetails": "View Full Details",
+    "quickView": "Quick View"
   },
   "auth": {
     "resetPasswordTitle": "Reset Password",
