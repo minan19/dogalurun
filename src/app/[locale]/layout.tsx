@@ -18,6 +18,7 @@ import { RegionalHealthBanner } from "@/components/RegionalHealthBanner";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { CookieBanner } from "@/components/CookieBanner";
 import { CartAbandonGuard } from "@/components/CartAbandonGuard";
+import { AnnouncementBar } from "@/components/AnnouncementBar";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -93,6 +94,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <GoogleAnalytics />
       <div lang={locale} dir={dir} className={`${inter.variable} font-sans antialiased`}>
+        <AnnouncementBar />
         <GeoDetector />
         <NavigationProgress />
         <RegionalHealthBanner />
