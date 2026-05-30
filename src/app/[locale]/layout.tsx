@@ -20,6 +20,7 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { CartAbandonGuard } from "@/components/CartAbandonGuard";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { BackToTop } from "@/components/BackToTop";
+import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -108,6 +109,7 @@ export default async function LocaleLayout({
         <CookieBanner />
         <CartAbandonGuard />
         <BackToTop />
+        <ExitIntentPopup />
         <ToastContainer />
       </div>
     </NextIntlClientProvider>
