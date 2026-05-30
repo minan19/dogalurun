@@ -21,6 +21,7 @@ import { CartAbandonGuard } from "@/components/CartAbandonGuard";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { BackToTop } from "@/components/BackToTop";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
+import { CompareBar } from "@/components/CompareBar";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -110,6 +111,7 @@ export default async function LocaleLayout({
         <CartAbandonGuard />
         <BackToTop />
         <ExitIntentPopup />
+        <CompareBar />
         <ToastContainer />
       </div>
     </NextIntlClientProvider>

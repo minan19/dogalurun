@@ -324,7 +324,9 @@
     "beautyCtaButton": "احصل على استشارة مجانية",
     "loading": "جاري التحميل...",
     "viewDetails": "عرض التفاصيل",
-    "quickView": "عرض سريع"
+    "quickView": "عرض سريع",
+    "compare": "قارن",
+    "inCompare": "في المقارنة"
   },
   "auth": {
     "resetPasswordTitle": "إعادة تعيين كلمة المرور",

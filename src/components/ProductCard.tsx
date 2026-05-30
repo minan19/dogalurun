@@ -9,6 +9,7 @@ import { useWishlistStore } from "@/store/wishlistStore";
 import { toast } from "@/store/toastStore";
 import { useState, useEffect } from "react";
 import { ProductQuickView } from "@/components/ProductQuickView";
+import { useCompareStore } from "@/store/compareStore";
 
 function categoryGradient(cat?: string) {
   const map: Record<string, string> = {
@@ -46,11 +47,13 @@ export function ProductCard({ product }: ProductCardProps) {
   const t = useTranslations("products");
   const addItem = useCartStore((s) => s.addItem);
   const { toggle, has } = useWishlistStore();
+  const { toggle: compareToggle, has: compareHas } = useCompareStore();
   const [mounted, setMounted] = useState(false);
   const [imgError, setImgError] = useState(false);
   const [showQuickView, setShowQuickView] = useState(false);
   useEffect(() => { setMounted(true); }, []);
   const inWishlist = mounted && has(product.id);
+  const inCompare = mounted && compareHas(product.id);
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
@@ -225,6 +228,21 @@ export function ProductCard({ product }: ProductCardProps) {
             {isOutOfStock ? t("outOfStock") : t("addToCart")}
           </button>
         </div>
+
+        {/* Karşılaştır */}
+        <button
+          onClick={(e) => { e.preventDefault(); compareToggle(product.id); }}
+          className={`flex items-center gap-1.5 text-[11px] transition-colors self-start ${
+            inCompare
+              ? "text-blue-600 font-semibold"
+              : "text-text-secondary/40 hover:text-blue-400"
+          }`}
+        >
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+          </svg>
+          {inCompare ? t("inCompare") : t("compare")}
+        </button>
       </div>
     </Link>
   );

@@ -324,7 +324,9 @@
     "beautyCtaButton": "Получить бесплатную консультацию",
     "loading": "Загрузка...",
     "viewDetails": "Смотреть детали",
-    "quickView": "Быстрый просмотр"
+    "quickView": "Быстрый просмотр",
+    "compare": "Сравнить",
+    "inCompare": "В сравнении"
   },
   "auth": {
     "resetPasswordTitle": "Сброс пароля",

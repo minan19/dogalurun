@@ -324,7 +324,9 @@
     "beautyCtaButton": "Get Free Consultation",
     "loading": "Loading...",
     "viewDetails": "View Full Details",
-    "quickView": "Quick View"
+    "quickView": "Quick View",
+    "compare": "Compare",
+    "inCompare": "In Compare"
   },
   "auth": {
     "resetPasswordTitle": "Reset Password",
