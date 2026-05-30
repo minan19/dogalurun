@@ -6,6 +6,7 @@ import { useGeoStore } from "@/store/geoStore";
 import { Link } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { products } from "@/data/products";
 
 type LocaleKey = "tr" | "en" | "ar" | "ru";
 
@@ -29,6 +30,7 @@ const cartTranslations = {
     couponInvalid: "Geçersiz kod",
     discount: "İndirim",
     total: "Toplam",
+    upsell: "Bunları da beğenebilirsiniz",
   },
   en: {
     dir: "ltr",
@@ -49,6 +51,7 @@ const cartTranslations = {
     couponInvalid: "Invalid code",
     discount: "Discount",
     total: "Total",
+    upsell: "You might also like",
   },
   ar: {
     dir: "rtl",
@@ -69,6 +72,7 @@ const cartTranslations = {
     couponInvalid: "كود غير صالح",
     discount: "الخصم",
     total: "الإجمالي",
+    upsell: "قد يعجبك أيضاً",
   },
   ru: {
     dir: "ltr",
@@ -89,11 +93,12 @@ const cartTranslations = {
     couponInvalid: "Неверный код",
     discount: "Скидка",
     total: "Итого",
+    upsell: "Вам также может понравиться",
   },
 } as const;
 
 export function CartDrawer() {
-  const { items, isOpen, closeCart, removeItem, updateQty, total, count } = useCartStore();
+  const { items, isOpen, closeCart, removeItem, updateQty, total, count, addItem } = useCartStore();
   const { validateCoupon } = useCouponStore();
   const { isFreeShipping, freeShippingRemaining, formatPrice, getShippingCost } = useGeoStore();
   const [mounted, setMounted] = useState(false);
@@ -249,6 +254,45 @@ export function CartDrawer() {
               })}
             </ul>
           )}
+
+          {/* Upsell öneriler */}
+          {mounted && items.length > 0 && (() => {
+            const cartIds = new Set(items.map(i => i.product.id));
+            const suggestions = products
+              .filter(p => !cartIds.has(p.id) && p.inStock && p.stock > 0)
+              .sort(() => Math.random() - 0.5)
+              .slice(0, 3);
+            if (suggestions.length === 0) return null;
+            return (
+              <div className="mt-5 pt-4 border-t border-olive-border/20">
+                <p className="text-xs font-semibold text-text-secondary/70 uppercase tracking-wide mb-3">
+                  {t.upsell}
+                </p>
+                <div className="flex flex-col gap-2">
+                  {suggestions.map(p => (
+                    <div key={p.id} className="flex items-center gap-3 bg-cream-50 rounded-xl p-2.5 border border-olive-border/15">
+                      <div className="w-10 h-10 shrink-0 bg-green-50 rounded-lg flex items-center justify-center border border-olive-border/15">
+                        <span className="text-lg opacity-25">🌿</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[11px] font-semibold text-green-900 leading-tight line-clamp-1">{p.amount} · {p.brand}</p>
+                        <p className="text-xs font-bold text-green-700 mt-0.5">{p.price.toLocaleString("tr-TR")} ₺</p>
+                      </div>
+                      <button
+                        onClick={() => addItem(p)}
+                        className="shrink-0 w-7 h-7 rounded-full bg-green-700 hover:bg-green-800 text-white flex items-center justify-center transition-colors"
+                        aria-label="Sepete ekle"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
 
         {/* Alt: Toplam + Ödeme */}
