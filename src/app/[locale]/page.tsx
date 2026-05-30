@@ -13,6 +13,7 @@ import { SportsBanner } from "@/components/SportsBanner";
 import { BeautyBanner } from "@/components/BeautyBanner";
 import { NewsletterSection } from "@/components/NewsletterSection";
 import { RecentlyViewedSection } from "@/components/RecentlyViewedSection";
+import { FlashSaleSection } from "@/components/FlashSaleSection";
 
 const SITE = "https://hudaisifa.com";
 const locales = ["tr", "en", "ar", "ru"] as const;
@@ -67,6 +68,7 @@ export default async function HomePage({
         <StatsStrip />
         <NeedsSection />
         <FeaturedProducts />
+        <FlashSaleSection />
         <SportsBanner />
         <BeautyBanner />
         <BlogTeaser />
