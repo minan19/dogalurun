@@ -182,6 +182,8 @@
     "ingredients": "Состав",
     "usage": "Инструкция по применению",
     "filterAll": "Все цены",
+    "whatsappOrder": "Заказать через WhatsApp",
+    "whatsappOrderMessage": "Здравствуйте, хочу заказать {name} за {price} ₺.",
     "sortDefault": "Рекомендуемые",
     "sortPriceAsc": "Цена: по возрастанию",
     "sortPriceDesc": "Цена: по убыванию",

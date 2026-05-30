@@ -182,6 +182,8 @@
     "ingredients": "مكونات المنتج",
     "usage": "طريقة الاستخدام",
     "filterAll": "جميع الأسعار",
+    "whatsappOrder": "اطلب عبر واتساب",
+    "whatsappOrderMessage": "مرحبًا، أريد طلب {name} بسعر {price} ليرة.",
     "sortDefault": "الترتيب المقترح",
     "sortPriceAsc": "السعر: من الأقل إلى الأعلى",
     "sortPriceDesc": "السعر: من الأعلى إلى الأقل",

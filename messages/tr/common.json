@@ -182,6 +182,8 @@
     "ingredients": "İçerik Bilgisi",
     "usage": "Kullanım Önerisi",
     "filterAll": "Tüm Fiyatlar",
+    "whatsappOrder": "WhatsApp ile Sipariş Ver",
+    "whatsappOrderMessage": "Merhaba, {name} ürününü {price} ₺ fiyatından sipariş vermek istiyorum.",
     "sortDefault": "Önerilen Sıra",
     "sortPriceAsc": "Fiyat: Düşükten Yükseğe",
     "sortPriceDesc": "Fiyat: Yüksekten Düşüğe",
