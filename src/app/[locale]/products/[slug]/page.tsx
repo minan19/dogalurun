@@ -17,6 +17,7 @@ import { DealCountdown } from "@/components/DealCountdown";
 import { ProductFAQ } from "@/components/ProductFAQ";
 import { StockAlertButton } from "@/components/StockAlertButton";
 import { FrequentlyBoughtTogether } from "@/components/FrequentlyBoughtTogether";
+import { SubscribeAndSave } from "@/components/SubscribeAndSave";
 
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -202,6 +203,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                     {t(`expert_${product.expertNoteKey}`)}
                   </p>
                 </div>
+              )}
+
+              {/* Abone Ol ve Tasarruf Et */}
+              {product.inStock && product.stock > 0 && (
+                <SubscribeAndSave price={product.price} />
               )}
 
               {/* Fiyat & Sepet */}
