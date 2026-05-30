@@ -14,6 +14,7 @@ import { ProductReviews } from "@/components/ProductReviews";
 import { RecentlyViewedTracker } from "@/components/RecentlyViewedTracker";
 import { StickyCartBar } from "@/components/StickyCartBar";
 import { DealCountdown } from "@/components/DealCountdown";
+import { ProductFAQ } from "@/components/ProductFAQ";
 
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -267,6 +268,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             rating={product.rating}
             reviewCount={product.reviewCount}
           />
+
+          <ProductFAQ productId={product.id} />
 
           {/* Benzer Ürünler */}
           {(() => {
