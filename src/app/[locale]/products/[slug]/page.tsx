@@ -203,6 +203,19 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 />
               </div>
 
+              {/* Teslimat tahmini */}
+              {product.inStock && product.stock > 0 && (
+                <div className="flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3">
+                  <svg className="w-5 h-5 text-blue-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                  </svg>
+                  <div>
+                    <p className="text-xs font-semibold text-blue-800">{t("deliveryToday")}</p>
+                    <p className="text-[11px] text-blue-600/80">{t("deliveryEstimate")}</p>
+                  </div>
+                </div>
+              )}
+
               {/* İçerik & Kullanım */}
               <div className="space-y-4">
                 <div className="border border-olive-border/30 rounded-xl overflow-hidden">

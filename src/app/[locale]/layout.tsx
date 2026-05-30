@@ -19,6 +19,7 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { CookieBanner } from "@/components/CookieBanner";
 import { CartAbandonGuard } from "@/components/CartAbandonGuard";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
+import { BackToTop } from "@/components/BackToTop";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -106,6 +107,7 @@ export default async function LocaleLayout({
         <FloatingButtons />
         <CookieBanner />
         <CartAbandonGuard />
+        <BackToTop />
         <ToastContainer />
       </div>
     </NextIntlClientProvider>

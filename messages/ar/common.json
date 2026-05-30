@@ -182,6 +182,8 @@
     "ingredients": "مكونات المنتج",
     "usage": "طريقة الاستخدام",
     "filterAll": "جميع الأسعار",
+    "deliveryToday": "اطلب اليوم، يُشحن غدًا",
+    "deliveryEstimate": "التسليم خلال 2-3 أيام عمل · الدفع عند الاستلام متاح",
     "whatsappOrder": "اطلب عبر واتساب",
     "whatsappOrderMessage": "مرحبًا، أريد طلب {name} بسعر {price} ليرة.",
     "sortDefault": "الترتيب المقترح",
