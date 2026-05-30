@@ -8,6 +8,7 @@ import { ProductsGrid } from "@/components/ProductsGrid";
 import { Suspense } from "react";
 import { SortSelect } from "@/components/SortSelect";
 import { PriceFilter } from "@/components/PriceFilter";
+import { ProductFilterBar } from "@/components/ProductFilterBar";
 import { ProductGridSkeleton } from "@/components/ProductCardSkeleton";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -22,12 +23,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 interface ProductsPageProps {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ category?: string; need?: string; sort?: string; priceMin?: string; priceMax?: string }>;
+  searchParams: Promise<{ category?: string; need?: string; sort?: string; priceMin?: string; priceMax?: string; badge?: string; inStock?: string; discounted?: string }>;
 }
 
 export default async function ProductsPage({ params, searchParams }: ProductsPageProps) {
   const { locale } = await params;
-  const { category, need, sort, priceMin, priceMax } = await searchParams;
+  const { category, need, sort, priceMin, priceMax, badge, inStock, discounted } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("products");
 
@@ -56,7 +57,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
           </div>
 
           {/* Fiyat filtresi + Sıralama */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
             <Suspense>
               <PriceFilter
                 priceMin={priceMin}
@@ -79,6 +80,17 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
             />
           </div>
 
+          {/* Ek filtreler: badge / stok / indirim */}
+          <div className="mb-6">
+            <Suspense>
+              <ProductFilterBar
+                badge={badge}
+                inStock={inStock}
+                discounted={discounted}
+              />
+            </Suspense>
+          </div>
+
           {/* Ürün grid */}
           <Suspense fallback={<ProductGridSkeleton count={8} />}>
             <ProductsGrid
@@ -87,6 +99,9 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
               sort={sort}
               priceMin={priceMin}
               priceMax={priceMax}
+              badge={badge}
+              inStock={inStock}
+              discounted={discounted}
               noProductsText={t("noProducts") as string}
               productsCountLabel={t("productsCount") as string}
             />

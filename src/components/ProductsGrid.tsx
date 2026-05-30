@@ -11,6 +11,9 @@ interface ProductsGridProps {
   sort?: string;
   priceMin?: string;
   priceMax?: string;
+  badge?: string;
+  inStock?: string;
+  discounted?: string;
   noProductsText?: string;
   productsCountLabel?: string;
 }
@@ -21,6 +24,9 @@ export function ProductsGrid({
   sort,
   priceMin,
   priceMax,
+  badge,
+  inStock,
+  discounted,
   noProductsText,
   productsCountLabel,
 }: ProductsGridProps) {
@@ -50,6 +56,18 @@ export function ProductsGrid({
   if (priceMax) {
     const max = Number(priceMax);
     filtered = filtered.filter((p) => p.price <= max);
+  }
+
+  if (badge) {
+    filtered = filtered.filter((p) => p.badge === badge);
+  }
+
+  if (inStock === "1") {
+    filtered = filtered.filter((p) => p.inStock && p.stock > 0);
+  }
+
+  if (discounted === "1") {
+    filtered = filtered.filter((p) => p.originalPrice && p.originalPrice > p.price);
   }
 
   if (sort === "price-asc") {
