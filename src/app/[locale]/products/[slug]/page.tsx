@@ -18,6 +18,7 @@ import { ProductFAQ } from "@/components/ProductFAQ";
 import { StockAlertButton } from "@/components/StockAlertButton";
 import { FrequentlyBoughtTogether } from "@/components/FrequentlyBoughtTogether";
 import { SubscribeAndSave } from "@/components/SubscribeAndSave";
+import { LoyaltyPointsBadge } from "@/components/LoyaltyPointsBadge";
 
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -208,6 +209,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               {/* Abone Ol ve Tasarruf Et */}
               {product.inStock && product.stock > 0 && (
                 <SubscribeAndSave price={product.price} />
+              )}
+
+              {/* Sadakat puanları */}
+              {product.inStock && product.stock > 0 && (
+                <LoyaltyPointsBadge price={product.price} />
               )}
 
               {/* Fiyat & Sepet */}
