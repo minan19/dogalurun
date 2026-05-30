@@ -14,6 +14,7 @@ import { BeautyBanner } from "@/components/BeautyBanner";
 import { NewsletterSection } from "@/components/NewsletterSection";
 import { RecentlyViewedSection } from "@/components/RecentlyViewedSection";
 import { FlashSaleSection } from "@/components/FlashSaleSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 
 const SITE = "https://hudaisifa.com";
 const locales = ["tr", "en", "ar", "ru"] as const;
@@ -73,6 +74,7 @@ export default async function HomePage({
         <BeautyBanner />
         <BlogTeaser />
         <ExpertNote />
+        <TestimonialsSection />
         <RecentlyViewedSection />
         <NewsletterSection />
       </main>
