@@ -9,6 +9,8 @@ interface ProductsGridProps {
   category?: string;
   need?: string;
   sort?: string;
+  priceMin?: string;
+  priceMax?: string;
   noProductsText?: string;
   productsCountLabel?: string;
 }
@@ -17,6 +19,8 @@ export function ProductsGrid({
   category,
   need,
   sort,
+  priceMin,
+  priceMax,
   noProductsText,
   productsCountLabel,
 }: ProductsGridProps) {
@@ -36,6 +40,16 @@ export function ProductsGrid({
     filtered = filtered.filter((p) =>
       p.needs.includes(need as NeedTag)
     );
+  }
+
+  if (priceMin) {
+    const min = Number(priceMin);
+    filtered = filtered.filter((p) => p.price >= min);
+  }
+
+  if (priceMax) {
+    const max = Number(priceMax);
+    filtered = filtered.filter((p) => p.price <= max);
   }
 
   if (sort === "price-asc") {

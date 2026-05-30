@@ -7,6 +7,7 @@ import { CategoryTabs } from "@/components/CategoryTabs";
 import { ProductsGrid } from "@/components/ProductsGrid";
 import { Suspense } from "react";
 import { SortSelect } from "@/components/SortSelect";
+import { PriceFilter } from "@/components/PriceFilter";
 import { ProductGridSkeleton } from "@/components/ProductCardSkeleton";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -21,12 +22,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 interface ProductsPageProps {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ category?: string; need?: string; sort?: string }>;
+  searchParams: Promise<{ category?: string; need?: string; sort?: string; priceMin?: string; priceMax?: string }>;
 }
 
 export default async function ProductsPage({ params, searchParams }: ProductsPageProps) {
   const { locale } = await params;
-  const { category, need, sort } = await searchParams;
+  const { category, need, sort, priceMin, priceMax } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("products");
 
@@ -54,12 +55,21 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
             </Suspense>
           </div>
 
-          {/* Sıralama */}
-          <div className="flex items-center justify-end mb-6">
+          {/* Fiyat filtresi + Sıralama */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+            <Suspense>
+              <PriceFilter
+                priceMin={priceMin}
+                priceMax={priceMax}
+                allLabel={t("filterAll")}
+              />
+            </Suspense>
             <SortSelect
               value={sort || ""}
               category={category}
               need={need}
+              priceMin={priceMin}
+              priceMax={priceMax}
               labels={{
                 default: t("sortDefault"),
                 priceAsc: t("sortPriceAsc"),
@@ -69,12 +79,14 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
             />
           </div>
 
-          {/* Ürün grid — productStore'dan okur, admin değişikliklerini anında gösterir */}
+          {/* Ürün grid */}
           <Suspense fallback={<ProductGridSkeleton count={8} />}>
             <ProductsGrid
               category={category}
               need={need}
               sort={sort}
+              priceMin={priceMin}
+              priceMax={priceMax}
               noProductsText={t("noProducts") as string}
               productsCountLabel={t("productsCount") as string}
             />

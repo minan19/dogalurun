@@ -4,6 +4,8 @@ interface SortSelectProps {
   value: string;
   category?: string;
   need?: string;
+  priceMin?: string;
+  priceMax?: string;
   labels: {
     default: string;
     priceAsc: string;
@@ -12,11 +14,13 @@ interface SortSelectProps {
   };
 }
 
-export function SortSelect({ value, category, need, labels }: SortSelectProps) {
+export function SortSelect({ value, category, need, priceMin, priceMax, labels }: SortSelectProps) {
   return (
     <form method="get">
       {category && <input type="hidden" name="category" value={category} />}
       {need && <input type="hidden" name="need" value={need} />}
+      {priceMin && <input type="hidden" name="priceMin" value={priceMin} />}
+      {priceMax && <input type="hidden" name="priceMax" value={priceMax} />}
       <select
         name="sort"
         defaultValue={value}

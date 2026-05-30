@@ -12,6 +12,7 @@ import { Footer } from "@/components/Footer";
 import { SportsBanner } from "@/components/SportsBanner";
 import { BeautyBanner } from "@/components/BeautyBanner";
 import { NewsletterSection } from "@/components/NewsletterSection";
+import { RecentlyViewedSection } from "@/components/RecentlyViewedSection";
 
 const SITE = "https://hudaisifa.com";
 const locales = ["tr", "en", "ar", "ru"] as const;
@@ -70,6 +71,7 @@ export default async function HomePage({
         <BeautyBanner />
         <BlogTeaser />
         <ExpertNote />
+        <RecentlyViewedSection />
         <NewsletterSection />
       </main>
       <Footer />
