@@ -114,6 +114,14 @@ const checkoutTranslations = {
     shipping: "Kargo",
     freeShipping: "Ücretsiz",
     codFeeLabel: "Kapıda Ödeme Ücreti",
+    giftWrapLabel: "Hediye Paketi",
+    giftWrapFeeLabel: "Hediye Paketi Ücreti",
+    giftWrapToggle: "🎁 Hediye Paketi Ekle (+25 ₺)",
+    giftWrapDesc: "Özel tasarım kutu, kurdele ve hediye notu kartı",
+    giftMsgLabel: "Hediye Mesajı (isteğe bağlı)",
+    giftMsgPlaceholder: "Kart üzerine yazılacak mesajınız...",
+    orderNoteLabel: "Sipariş Notu",
+    orderNotePlaceholder: "Teslimat veya ürün için notunuz (isteğe bağlı)...",
     total: "Toplam",
   },
   en: {
@@ -213,6 +221,14 @@ const checkoutTranslations = {
     shipping: "Shipping",
     freeShipping: "Free",
     codFeeLabel: "Cash on Delivery Fee",
+    giftWrapLabel: "Gift Wrap",
+    giftWrapFeeLabel: "Gift Wrap Fee",
+    giftWrapToggle: "🎁 Add Gift Wrap (+25 ₺)",
+    giftWrapDesc: "Special box, ribbon and personalized message card",
+    giftMsgLabel: "Gift Message (optional)",
+    giftMsgPlaceholder: "Your message for the gift card...",
+    orderNoteLabel: "Order Note",
+    orderNotePlaceholder: "Any notes for delivery or product (optional)...",
     total: "Total",
   },
   ar: {
@@ -312,6 +328,14 @@ const checkoutTranslations = {
     shipping: "الشحن",
     freeShipping: "مجاني",
     codFeeLabel: "رسوم الدفع عند الاستلام",
+    giftWrapLabel: "تغليف الهدايا",
+    giftWrapFeeLabel: "رسوم تغليف الهدايا",
+    giftWrapToggle: "🎁 إضافة تغليف الهدايا (+25 ₺)",
+    giftWrapDesc: "علبة خاصة وشريط وبطاقة رسالة شخصية",
+    giftMsgLabel: "رسالة الهدية (اختياري)",
+    giftMsgPlaceholder: "رسالتك على بطاقة الهدية...",
+    orderNoteLabel: "ملاحظة الطلب",
+    orderNotePlaceholder: "ملاحظات للتوصيل أو المنتج (اختياري)...",
     total: "الإجمالي",
   },
   ru: {
@@ -411,6 +435,14 @@ const checkoutTranslations = {
     shipping: "Доставка",
     freeShipping: "Бесплатно",
     codFeeLabel: "Плата за оплату при получении",
+    giftWrapLabel: "Подарочная упаковка",
+    giftWrapFeeLabel: "Стоимость упаковки",
+    giftWrapToggle: "🎁 Добавить упаковку (+25 ₺)",
+    giftWrapDesc: "Специальная коробка, лента и открытка с посланием",
+    giftMsgLabel: "Текст открытки (необязательно)",
+    giftMsgPlaceholder: "Ваше сообщение на подарочной открытке...",
+    orderNoteLabel: "Примечание к заказу",
+    orderNotePlaceholder: "Пожелания по доставке или товару (необязательно)...",
     total: "Итого",
   },
 } as const;
@@ -572,6 +604,9 @@ export function CheckoutForm() {
   const [couponInput, setCouponInput] = useState("");
   const [couponApplied, setCouponApplied] = useState<{ code: string; discount: number; type: "pct" | "flat" } | null>(null);
   const [couponError, setCouponError] = useState("");
+  const [giftWrap, setGiftWrap] = useState(false);
+  const [giftMessage, setGiftMessage] = useState("");
+  const [orderNote, setOrderNote] = useState("");
 
   function applyCoupon() {
     const result = validateCoupon(couponInput, total(), isLoggedIn ? profileEmail : undefined);
@@ -619,7 +654,8 @@ export function CheckoutForm() {
   const shippingCost = isFreeShipping(discountedTotal) ? 0 : getShippingCost(discountedTotal);
   const customsInfo = countryCode !== "TR" ? getCustomsInfo(countryCode) : null;
   const codFee = payMethod === "cod" ? 15 : 0;
-  const grandTotal = discountedTotal + shippingCost + codFee;
+  const giftWrapFee = giftWrap ? 25 : 0;
+  const grandTotal = discountedTotal + shippingCost + codFee + giftWrapFee;
 
   function handlePlaceOrder() {
     // Generate a stable order ID
@@ -754,9 +790,51 @@ export function CheckoutForm() {
                 </li>
               ))}
             </ul>
+            {/* Hediye Paketi */}
+            <div className="mt-5 border border-olive-border/30 rounded-xl overflow-hidden">
+              <label className={`flex items-start gap-3 px-4 py-3.5 cursor-pointer transition-colors ${giftWrap ? "bg-amber-50" : "bg-white hover:bg-cream-50"}`}>
+                <input
+                  type="checkbox"
+                  checked={giftWrap}
+                  onChange={(e) => setGiftWrap(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 accent-amber-500 shrink-0"
+                />
+                <div className="flex-1">
+                  <p className="text-sm font-semibold text-green-900">{t.giftWrapToggle}</p>
+                  <p className="text-xs text-text-secondary/70 mt-0.5">{t.giftWrapDesc}</p>
+                  {giftWrap && (
+                    <div className="mt-3">
+                      <label className="text-xs font-medium text-green-800 block mb-1">{t.giftMsgLabel}</label>
+                      <textarea
+                        value={giftMessage}
+                        onChange={(e) => setGiftMessage(e.target.value)}
+                        placeholder={t.giftMsgPlaceholder}
+                        rows={2}
+                        maxLength={120}
+                        className="w-full text-sm border border-olive-border/40 rounded-lg px-3 py-2 resize-none focus:outline-none focus:border-amber-400 placeholder:text-text-secondary/40"
+                      />
+                    </div>
+                  )}
+                </div>
+              </label>
+            </div>
+
+            {/* Sipariş Notu */}
+            <div className="mt-3">
+              <label className="text-xs font-medium text-green-800 block mb-1">{t.orderNoteLabel}</label>
+              <textarea
+                value={orderNote}
+                onChange={(e) => setOrderNote(e.target.value)}
+                placeholder={t.orderNotePlaceholder}
+                rows={2}
+                maxLength={200}
+                className="w-full text-sm border border-olive-border/40 rounded-xl px-3 py-2.5 resize-none focus:outline-none focus:border-green-400 placeholder:text-text-secondary/40 bg-white"
+              />
+            </div>
+
             <button
               onClick={() => setStep("address")}
-              className="mt-6 w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-3 rounded-xl text-sm transition-colors"
+              className="mt-4 w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-3 rounded-xl text-sm transition-colors"
             >
               {t.nextAddress}
             </button>
@@ -1357,6 +1435,12 @@ export function CheckoutForm() {
                 <div className="flex justify-between text-text-secondary">
                   <span>{t.codFeeLabel}</span>
                   <span>+{codFee.toLocaleString("tr-TR")} ₺</span>
+                </div>
+              )}
+              {giftWrapFee > 0 && (
+                <div className="flex justify-between text-amber-700">
+                  <span className="flex items-center gap-1">🎁 {t.giftWrapFeeLabel}</span>
+                  <span>+{giftWrapFee.toLocaleString("tr-TR")} ₺</span>
                 </div>
               )}
               <div className="flex justify-between font-bold text-green-900 text-base pt-2 border-t border-olive-border/20">
