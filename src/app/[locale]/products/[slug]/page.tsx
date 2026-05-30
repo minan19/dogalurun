@@ -13,6 +13,7 @@ import { SocialProofBadge } from "@/components/SocialProofBadge";
 import { ProductReviews } from "@/components/ProductReviews";
 import { RecentlyViewedTracker } from "@/components/RecentlyViewedTracker";
 import { StickyCartBar } from "@/components/StickyCartBar";
+import { DealCountdown } from "@/components/DealCountdown";
 
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -179,6 +180,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
               {/* Sosyal kanıt */}
               <SocialProofBadge productId={product.id} />
+
+              {/* İndirim geri sayımı */}
+              {discount > 0 && (
+                <DealCountdown productId={product.id} discount={discount} />
+              )}
 
               {/* Uzman notu */}
               {product.expertNoteKey && (
