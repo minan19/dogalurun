@@ -31,7 +31,7 @@ interface Props {
 export function FrequentlyBoughtTogether({ mainProduct, bundleProducts, productNames }: Props) {
   const locale = (useLocale() as Locale) ?? "tr";
   const l = labels[locale] ?? labels.tr;
-  const { addItem } = useCartStore();
+  const { addItem, openCart } = useCartStore();
   const { show } = useToastStore();
 
   const allItems = [mainProduct, ...bundleProducts].slice(0, 3);
@@ -57,9 +57,10 @@ export function FrequentlyBoughtTogether({ mainProduct, bundleProducts, productN
   const bundleSaving = originalTotal - totalPrice;
 
   function handleAddAll() {
-    selectedItems.forEach(p => addItem(p));
-    setAddedAll(true);
+    selectedItems.forEach(p => addItem(p, 1));
     show(l.added, "success");
+    setAddedAll(true);
+    openCart();
     setTimeout(() => setAddedAll(false), 3000);
   }
 

@@ -19,6 +19,7 @@ import { StockAlertButton } from "@/components/StockAlertButton";
 import { FrequentlyBoughtTogether } from "@/components/FrequentlyBoughtTogether";
 import { SubscribeAndSave } from "@/components/SubscribeAndSave";
 import { LoyaltyPointsBadge } from "@/components/LoyaltyPointsBadge";
+import { QuantityDiscountWidget } from "@/components/QuantityDiscountWidget";
 
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -209,6 +210,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               {/* Abone Ol ve Tasarruf Et */}
               {product.inStock && product.stock > 0 && (
                 <SubscribeAndSave price={product.price} />
+              )}
+
+              {/* Adet indirimi */}
+              {product.inStock && product.stock > 0 && (
+                <QuantityDiscountWidget product={product} />
               )}
 
               {/* Sadakat puanları */}
