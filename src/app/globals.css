@@ -27,6 +27,7 @@
 body {
   background: var(--color-cream-50);
   color: var(--color-text-primary);
+  overflow-x: clip;
 }
 
 @keyframes fade-in-up {

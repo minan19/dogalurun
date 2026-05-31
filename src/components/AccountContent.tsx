@@ -503,6 +503,37 @@ function LoginForm({ onLogin, t }: { onLogin: (email: string, name: string) => v
             onClick={async () => {
               setAuthError("");
               setLoading(true);
+
+              const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+              const isDemoMode = !supabaseUrl || supabaseUrl.includes("placeholder");
+
+              if (isDemoMode) {
+                // Demo mod: Supabase yapılandırılmamış, doğrudan yerel login
+                if (tab === "login") {
+                  if (!emailInput || !passwordInput) {
+                    setAuthError("Lütfen e-posta ve şifrenizi girin.");
+                    setLoading(false);
+                    return;
+                  }
+                  const displayName = emailInput.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+                  onLogin(emailInput, nameInput.trim() || displayName);
+                } else {
+                  if (!nameInput.trim()) {
+                    setAuthError("Lütfen adınızı girin.");
+                    setLoading(false);
+                    return;
+                  }
+                  if (!emailInput || !passwordInput) {
+                    setAuthError("Lütfen tüm alanları doldurun.");
+                    setLoading(false);
+                    return;
+                  }
+                  onLogin(emailInput, nameInput.trim());
+                }
+                setLoading(false);
+                return;
+              }
+
               if (tab === "login") {
                 const { data, error } = await signIn(emailInput, passwordInput);
                 if (error) {
@@ -523,7 +554,6 @@ function LoginForm({ onLogin, t }: { onLogin: (email: string, name: string) => v
                 if (error) {
                   setAuthError(error.message);
                 } else if (data.user) {
-                  // Auto-login after sign up (email confirmation may be required)
                   const { data: signInData, error: signInErr } = await signIn(emailInput, passwordInput);
                   if (!signInErr && signInData.user) {
                     onLogin(signInData.user.email ?? emailInput, nameInput.trim());
