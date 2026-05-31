@@ -5,6 +5,7 @@ import { useUserProfileStore } from "@/store/userProfileStore";
 import { signIn, signUp, signOut } from "@/lib/auth";
 import { Link } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
+import { ReferralWidget } from "@/components/ReferralWidget";
 
 type LocaleKey = "tr" | "en" | "ar" | "ru";
 
@@ -45,8 +46,8 @@ const accountTranslations = {
       notifications: "Bildirimler",
       reviews: "Değerlendirmelerim",
       quiz: "Sağlık Profilim",
+      referral: "Arkadaşını Davet Et",
     },
-    // Panels
     ordersTitle: "Son Siparişlerim",
     trackOrderBtn: "🚚 Kargoda Takip Et",
     cargoDetailBtn: "Kargo Detayı",
@@ -131,6 +132,7 @@ const accountTranslations = {
       notifications: "Notifications",
       reviews: "My Reviews",
       quiz: "Health Profile",
+      referral: "Invite Friends",
     },
     ordersTitle: "Recent Orders",
     trackOrderBtn: "🚚 Track Shipment",
@@ -216,6 +218,7 @@ const accountTranslations = {
       notifications: "الإشعارات",
       reviews: "تقييماتي",
       quiz: "ملفي الصحي",
+      referral: "ادعُ أصدقاءك",
     },
     ordersTitle: "آخر الطلبات",
     trackOrderBtn: "🚚 تتبع الشحنة",
@@ -301,6 +304,7 @@ const accountTranslations = {
       notifications: "Уведомления",
       reviews: "Мои отзывы",
       quiz: "Профиль здоровья",
+      referral: "Пригласить друзей",
     },
     ordersTitle: "Последние заказы",
     trackOrderBtn: "🚚 Отследить доставку",
@@ -409,7 +413,7 @@ const tierColors: Record<string, string> = {
   Altın:  "text-yellow-700 bg-yellow-50 border-yellow-200",
 };
 
-type Panel = "orders" | "tracking" | "payment" | "notifications" | "reviews" | "quiz" | null;
+type Panel = "orders" | "tracking" | "payment" | "notifications" | "reviews" | "quiz" | "referral" | null;
 type T = typeof accountTranslations.tr;
 
 // ─── Giriş Formu ─────────────────────────────────────────────────────────────
@@ -644,6 +648,7 @@ function Dashboard({ onLogout, t }: { onLogout: () => void; t: T }) {
     { id: "notifications", icon: "🔔", label: t.tiles.notifications,  badge: null,                  href: null },
     { id: "reviews",       icon: "⭐", label: t.tiles.reviews,        badge: 2,                     href: null },
     { id: "quiz",          icon: "🌿", label: t.tiles.quiz,           badge: null,                  href: null },
+    { id: "referral",      icon: "🎁", label: t.tiles.referral,       badge: null,                  href: null },
   ] as const;
 
   const quizValues = ["25–34", "Enerji & Bağışıklık", "Orta", "10 Mar 2026"];
@@ -911,6 +916,13 @@ function Dashboard({ onLogout, t }: { onLogout: () => void; t: T }) {
             className="block w-full text-center bg-[#556B2F] hover:bg-[#2F3B1A] text-white text-xs font-semibold py-2.5 rounded-xl transition-colors">
             {t.newRecommendationBtn}
           </Link>
+        </div>
+      )}
+
+      {/* Panel: Referral */}
+      {activePanel === "referral" && (
+        <div className="mb-6">
+          <ReferralWidget email={email} />
         </div>
       )}
 
