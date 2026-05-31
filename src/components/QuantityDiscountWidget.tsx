@@ -73,7 +73,7 @@ interface Props {
 export function QuantityDiscountWidget({ product }: Props) {
   const locale = (useLocale() as Locale) ?? "tr";
   const l = labels[locale] ?? labels.tr;
-  const { addItem } = useCartStore();
+  const { addItem, openCart } = useCartStore();
   const [selected, setSelected] = useState(1);
   const [added, setAdded] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -97,6 +97,7 @@ export function QuantityDiscountWidget({ product }: Props) {
     }
     toast.success(l.added.replace(" ✓", ""));
     setAdded(true);
+    openCart();
     setTimeout(() => setAdded(false), 2000);
   }
 

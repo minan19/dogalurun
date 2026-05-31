@@ -13,7 +13,7 @@ interface ProductDetailActionsProps {
 }
 
 export function ProductDetailActions({ product, addToCartLabel }: ProductDetailActionsProps) {
-  const { addItem } = useCartStore();
+  const { addItem, openCart } = useCartStore();
   const { toggle, has } = useWishlistStore();
   const t = useTranslations("products");
   const [mounted, setMounted] = useState(false);
@@ -30,6 +30,7 @@ export function ProductDetailActions({ product, addToCartLabel }: ProductDetailA
     addItem(product, qty);
     toast.success(t("addedToCart"));
     setAdded(true);
+    openCart();
     setTimeout(() => setAdded(false), 1800);
   }
 
